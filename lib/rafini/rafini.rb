@@ -38,8 +38,9 @@ module Rafini
       end
 
       def scale(type=:short)
-        n,s = 1000, nil; n2 = n*n
-        r = (type==:short)? 1 : 3
+        n,s = 1000, nil
+        n2 = n*n
+
         case type
         when :short
           s = self.odometer(n,n,n,n,n)
@@ -48,19 +49,30 @@ module Rafini
         else
           raise "Don't know type #{type}."
         end
-        string = s[5].to_s
-        0.upto(4) do |i|
+
+        string = '0'
+        r = proc {|v,d,m| (v/d.to_f).round((m<10)? 2 : (m<100)? 1 : 0) }
+        0.upto(5) do |i|
           if s[i] > 0
             m = s[i]
-            d = (type==:short or i==4)? n : n2
-            if m < d
-              m += (s[i+1]/d.to_f).round(r)
+            if type==:short or i>3
+              if m<n and i<5
+                m += r.call(s[i+1], n, m)
+              end
+            else
+              if m>n
+                m = m.scale(:short)
+              else
+                d = (i==3)? n : n2
+                m += r.call(s[i+1], d, m)
+              end
             end
             string = m.to_s
-            string << 'QTBMK'[i]
+            string << 'QTBMk'[i] if i<5
             break
           end
         end
+
         return {
           quadrillion: s[0],
           trillion:    s[1],
