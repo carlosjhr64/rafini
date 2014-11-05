@@ -19,9 +19,9 @@ module Rafini
           string = "#{s[3]} day#{(s[3]>1)? 's' : ''}"
           string << ", #{s[4]} hour#{(s[4]>1)? 's' : ''}" if s[4]>0
         else
-          sec = s[6].to_s.pad(2,'0')
-          min = s[5].to_s.pad(2,'0')
-          hrs = s[4].to_s.pad(2,'0')
+          sec = s[6].to_s.rjust(2,'0')
+          min = s[5].to_s.rjust(2,'0')
+          hrs = s[4].to_s.rjust(2,'0')
           string = [hrs,min,sec].join(':')
         end
 
