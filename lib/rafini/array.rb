@@ -12,6 +12,10 @@ module Rafini
         end
         return s
       end
+
+      def per(b=nil)
+        0.upto(length-1){|i| yield self[i], (b)? b[i] : i}
+      end
     end
   end
 end

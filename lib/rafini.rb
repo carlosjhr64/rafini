@@ -6,7 +6,7 @@ require 'rafini/hash'
 require 'rafini/integer'
 require 'rafini/string'
 
-require 'rafini/rafini'
+require 'rafini/odometers'
 
 # Requires:
 #`ruby`
