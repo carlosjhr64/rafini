@@ -1,0 +1,153 @@
+#! ruby
+require 'stringio'
+require 'thread'
+require 'test/unit'
+require 'rafini/exception'
+
+unless $VERBOSE==false and $DEBUG==false
+  $VERBOSE=$DEBUG=false # tests assume this
+  warn "Warning: $VERBOSE and $DEBUG where set to false"
+end
+
+class TestRafini < Test::Unit::TestCase
+  using Rafini::Exception
+
+  def self.capture_stderr
+    out = StringIO.new
+    $stderr = out
+    yield
+    return out.string
+  ensure
+    $stderr = STDERR
+  end
+
+  def test_puts
+
+    assert_nothing_raised() do
+      out = nil
+      begin
+        raise 'BANG!'
+      rescue Exception
+        out = TestRafini.capture_stderr{ $!.puts('Bang!') }
+      end
+      assert_not_nil(out)
+      out.strip!
+      assert_equal('Bang!', out)
+    end
+
+    assert_nothing_raised() do
+      out = nil
+      begin
+        raise 'BANG!'
+      rescue Exception
+        out = TestRafini.capture_stderr{ $!.puts }
+      end
+      assert_not_nil(out)
+      out.strip!
+      assert_equal('BANG!', out)
+    end
+
+    assert_nothing_raised() do
+      out = nil
+      begin
+        $VERBOSE = nil
+        raise 'BANG!'
+      rescue Exception
+        out = TestRafini.capture_stderr{ $!.puts }
+      ensure
+        $VERBOSE = false
+      end
+      assert_not_nil(out)
+      out.strip!
+      assert_equal('', out)
+    end
+
+    assert_nothing_raised() do
+      out = nil
+      begin
+        $VERBOSE = true
+        raise 'BANG!'
+      rescue Exception
+        out = TestRafini.capture_stderr{ $!.puts('Bang!') }
+      ensure
+        $VERBOSE = false
+      end
+      assert_not_nil(out)
+      out.strip!
+      assert_equal("Bang!\nBANG!", out)
+    end
+
+    assert_nothing_raised() do
+      out = nil
+      begin
+        $DEBUG = true
+        raise 'BANG!'
+      rescue Exception
+        out = TestRafini.capture_stderr{ $!.puts }
+      ensure
+        $DEBUG = false
+      end
+      assert_not_nil(out)
+      out.strip!
+      assert_match(/BANG!/, out) # we got the raised message
+      assert_match(/tc_exception/, out) # we got the debug trace
+    end
+
+  end
+
+  def test_bang
+
+    assert_nothing_raised() do
+      out=error=nil
+      out = TestRafini.capture_stderr do
+        error = Rafini.bang!('Bang!'){ raise 'BANG!'}
+      end
+      assert_not_nil(out)
+      out.strip!
+      assert_equal('Bang!', out)
+      assert_not_nil(error)
+      assert_equal(RuntimeError, error.class)
+    end
+
+    assert_nothing_raised() do
+      out=error=nil
+      out = TestRafini.capture_stderr do
+        error = Rafini.bang!{ raise 'BANG!'}
+      end
+      assert_not_nil(out)
+      out.strip!
+      assert_equal('BANG!', out)
+      assert_not_nil(error)
+      assert_equal(RuntimeError, error.class)
+    end
+
+    assert_nothing_raised() do
+      out=value=nil
+      out = TestRafini.capture_stderr do
+        value = Rafini.bang!{ $stderr.puts 'No Error.'}
+      end
+      assert_not_nil(out)
+      out.strip!
+      assert_equal('No Error.', out)
+      assert_nil(value)
+    end
+
+    assert_nothing_raised() do
+      value = Rafini.bang!{5}
+      assert_equal(5, value)
+    end
+
+  end
+
+  def test_thread_bang!
+    $VEBOSE=nil
+    assert_nothing_raised() do
+      thread = Rafini.thread_bang!{raise 'BANG!'}
+      assert_equal(RuntimeError, thread.value.class)
+      thread = Rafini.thread_bang!{'OK'}
+      assert_equal('OK', thread.value)
+    end
+    $VEBOSE=false
+  end
+
+end
