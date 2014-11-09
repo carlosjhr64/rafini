@@ -1,0 +1,38 @@
+#! ruby
+require 'test/unit'
+require 'rafini/array'
+
+class TestArray < Test::Unit::TestCase
+  using Rafini::Array
+
+  def test_joins
+    assert_nothing_raised() do
+      a = ['a','b','c','d']
+      x = ['x','y','z']
+      assert_equal('axbyczd', a.joins(*x))
+      assert_equal('a,b.cd', a.joins(',','.'))
+      assert_equal('a-b:c:d', a.joins('-'){':'})
+      assert_equal('a1b2c3d', a.joins{|i|i})
+    end
+  end
+
+  def test_per
+    assert_nothing_raised() do
+      a = ['a','b','c','d']
+      b = ['A','B','C','D']
+
+      h = {}
+      a.per(b){|l,m| h[l]=m}
+      assert_equal({'a'=>'A', 'b'=>'B', 'c'=>'C', 'd'=>'D'}, h)
+
+      h = {}
+      a.per{|l,i| h[l]=i}
+      assert_equal({'a'=>0, 'b'=>1, 'c'=>2, 'd'=>3}, h)
+
+      h = {}
+      a.per{|l,i| h[l]=b[i]}
+      assert_equal({'a'=>'A', 'b'=>'B', 'c'=>'C', 'd'=>'D'}, h)
+    end
+  end
+
+end

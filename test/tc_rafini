@@ -1,0 +1,17 @@
+#! ruby
+require 'test/unit'
+
+class TestRafini < Test::Unit::TestCase
+  def test_require
+    assert_nothing_raised() do
+      require 'rafini'
+
+      assert_equal Module, Rafini::Exception.class
+      assert_equal Module, Rafini::Hash.class
+      assert_equal Module, Rafini::Integer.class
+      assert_equal Module, Rafini::String.class
+
+      assert_equal Module, Rafini::Odometers.class
+    end
+  end
+end
