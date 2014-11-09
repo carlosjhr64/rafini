@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+RUBY = 'ruby -I ./lib'
+LOG = './test/errors.log'
+
+def fn(name)
+  "./test/tc_#{name}"
+end
+
+def tc(name)
+  system "#{RUBY} #{fn(name)} > #{LOG} 2> /dev/null"
+end
+
+if tc('array') and tc('exception') and tc('rafini')
+  puts 'All tests passed!'
+  File.unlink LOG
+else
+  puts "There were errors.  See #{LOG}"
+  exit 1
+end
