@@ -6,6 +6,7 @@ class TestRafini < Test::Unit::TestCase
     assert_nothing_raised() do
       require 'rafini'
 
+      assert_equal Module, Rafini::Array.class
       assert_equal Module, Rafini::Exception.class
       assert_equal Module, Rafini::Hash.class
       assert_equal Module, Rafini::Integer.class
