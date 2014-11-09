@@ -5,7 +5,7 @@ module Rafini
       # Message is what you normally want to see.
       # The exeption message is also shown if in verbose mode.
       # Bactrace is shown if in debug mode.
-      def bang!(message=nil)
+      def puts(message=nil)
         unless $VERBOSE.nil? then
           $stderr.puts message if message
           $stderr.puts self.message if $VERBOSE or !message
@@ -14,6 +14,18 @@ module Rafini
       end
     end
   end
+end
+
+# Module version of bang!
+using Rafini::Exception
+def Rafini.bang!(message=nil, bang=Exception, &block)
+  value = nil
+  begin
+    value = block.call
+  rescue bang => value
+    value.puts(message)
+  end
+  return value
 end
 
 # The Thread wrapped version of bang!
@@ -29,18 +41,6 @@ end
 #  end
 # With the following below, I'll be able to say
 # Rafini.thread_bang!('blah blah...'){ ...stuff... }
-def Rafini.thread_bang!(header=nil, &block)
-  Thread.new{Rafini.bang!(header, &block)}
-end
-
-# Module version of bang!
-using Rafini::Exception
-def Rafini.bang!(message=nil, bang=Exception, &block)
-  error = nil
-  begin
-    block.call
-  rescue bang => error
-    error.bang!(message)
-  end
-  return error
+def Rafini.thread_bang!(header=nil, bang=Exception, &block)
+  Thread.new{Rafini.bang!(header, bang, &block)}
 end
