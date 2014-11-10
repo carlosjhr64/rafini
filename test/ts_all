@@ -11,7 +11,7 @@ def tc(name)
   system "#{RUBY} #{fn(name)} > #{LOG} 2> /dev/null"
 end
 
-if tc('array') and tc('exception') and tc('rafini') and tc('hash')
+if tc('array') and tc('exception') and tc('rafini') and tc('hash') and tc('string')
   puts 'All tests passed!'
   File.unlink LOG
 else

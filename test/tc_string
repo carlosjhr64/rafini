@@ -1,0 +1,18 @@
+#! ruby
+require 'test/unit'
+require 'rafini/string'
+
+class TestString < Test::Unit::TestCase
+  using Rafini::String
+
+  def test_camelize
+    assert_nothing_raised() do
+      a_b = 'a_camel_kick'
+      aB = a_b.camelize
+      assert_equal('ACamelKick', aB)
+      aWb = 'a-camel-kick'
+      aB = aWb.camelize(/\W/)
+      assert_equal('ACamelKick', aB)
+    end
+  end
+end
