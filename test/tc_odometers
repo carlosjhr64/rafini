@@ -51,4 +51,73 @@ class TestOdometers < Test::Unit::TestCase
       assert_equal 1, 10_000_000_000_000_000.sec2time.eon
     end
   end
+
+  def test_million
+    assert_nothing_raised() do
+      assert_equal '123', 123.million.to_s
+      assert_equal '1.23k', 1_234.million.to_s
+      assert_equal '12.3k', 12_344.million.to_s
+      assert_equal '123k', 123_456.million.to_s
+      assert_equal '1.23M', 1_234_567.million.to_s
+      assert_equal '12.3M', 12_345_678.million.to_s
+      assert_equal '123M', 123_456_789.million.to_s
+
+      assert_equal '1.23B', 1_234_567_890.million(:short).to_s
+      assert_equal '1.23kM', 1_234_567_890.million(:long).to_s
+
+      assert_equal '12.3B', 12_345_678_900.million(:short).to_s
+      assert_equal '12.3kM', 12_345_678_900.million(:long).to_s
+
+      assert_equal '123B', 123_456_789_000.million(:short).to_s
+      assert_equal '123kM', 123_456_789_000.million(:long).to_s
+
+      assert_equal '1.23T', 1_234_567_890_000.million(:short).to_s
+      assert_equal '1.23B', 1_234_567_890_000.million(:long).to_s
+
+      assert_equal '12.3T', 12345678900000.million(:short).to_s
+      assert_equal '12.3B', 12345678900000.million(:long).to_s
+
+      assert_equal '123T', 123456789000000.million(:short).to_s
+      assert_equal '123B', 123456789000000.million(:long).to_s
+
+      assert_equal '1.23Q',  1234567890000000.million.to_s # short default
+      assert_equal '1.23kB', 1234567890000000.million(:long).to_s
+
+      assert_equal '12.3Q',  12345678900000000.million.to_s
+      assert_equal '12.3kB', 12345678900000000.million(:long).to_s
+
+      assert_equal '123Q',  123456789000000000.million.to_s
+      assert_equal '123kB', 123456789000000000.million(:long).to_s
+
+      assert_equal '1.23kQ',  1234567890000000000.million.to_s
+      # short version works, but
+      # use does not make sense for numbers bigger that Quadrillion
+      # as coded.  Needs Quintillion, and so on...
+      # Unless one likes 1.23kQ, recurses nicely as shown:
+      q = 1000000000000000
+      assert_equal '1.0Q', q.million.to_s
+      assert_equal '1.0QQ', (q*q).million.to_s
+
+      assert_equal '1.23T', 1234567890000000000.million(:long).to_s
+      assert_equal '12.3T',  12345678900000000000.million(:long).to_s
+      assert_equal '123T',   123456789000000000000.million(:long).to_s
+      assert_equal '1.23kT', 1234567890000000000000.million(:long).to_s
+      assert_equal '12.3kT', 12345678900000000000000.million(:long).to_s
+      assert_equal '123kT',  123456789000000000000000.million(:long).to_s
+      assert_equal '1.23Q',  1234567890000000000000000.million(:long).to_s
+      assert_equal '1.23kQ', 1234567890000000000000000000.million(:long).to_s
+      assert_equal '123kQ',  123456789000000000000000000000.million(:long).to_s
+      assert_equal '1.23MQ', 1234567890000000000000000000000.million(:long).to_s
+      # long version works, but
+      # use does not make sense for numbers bigger that kQuadrillions
+      # as coded.  Needs Quintillion, and so on...
+      # Unless one likes MQ, and so on, it recurses nicely as show below:
+      qs =             1_000_000_000_000_000
+      ql = 1_000_000_000_000_000_000_000_000
+      assert_equal '1.0Q', qs.million(:short).to_s
+      assert_equal '1.0Q', ql.million(:long).to_s
+      assert_equal '1.0QQ', (qs*ql).million(:long).to_s
+
+    end
+  end
 end

@@ -6,25 +6,7 @@ module Rafini
       # Need Rafini::Array for #per
       [Rafini::Integer, Rafini::Hash, Rafini::Array].each{|mod| using mod}
 
-      SEC2TIME = {
-          second:     60,
-          minute:     60,
-          hour:       24,
-          day:        7,
-          week:       4,
-          month:      13,
-          year:       10,
-          decade:     10,
-          centurie:   10,
-          millennium: 10,
-          age:        10,
-          epoch:      10,
-          era:        5,
-          eon:        2,
-          gigaannum:  nil,
-      }
-
-      def odometer_reader(scale)
+      def odoread(scale)
         values = scale.values
         keys = scale.keys;
         counts = self.odometer(*values[0..-2])
@@ -45,8 +27,26 @@ module Rafini
         return hash.to_struct
       end
 
+      SEC2TIME = {
+          second:     60,
+          minute:     60,
+          hour:       24,
+          day:        7,
+          week:       4,
+          month:      13,
+          year:       10,
+          decade:     10,
+          centurie:   10,
+          millennium: 10,
+          age:        10,
+          epoch:      10,
+          era:        5,
+          eon:        2,
+          gigaannum:  nil,
+      }
+
       def sec2time
-        self.odometer_reader(SEC2TIME)
+        self.odoread(SEC2TIME)
       end
 
       SCALE = {
@@ -54,29 +54,26 @@ module Rafini
           One:         10,
           Ten:         10,
           Hundred:     10,
+          Thousand:    1_000,
         },
         short: {
-          Thousand:    1_000,
           Million:     1_000,
           Billion:     1_000,
           Trillion:    1_000,
-          Quadrillion: 1_000,
-          bust:        1,
+          Quadrillion: nil,
         },
         long: {
-          Thousand:    1_000,
           Million:     1_000_000,
           Billion:     1_000_000,
           Trillion:    1_000_000,
-          Quadrillion: 1_000_000,
-          bust:        1,
+          Quadrillion: nil,
         },
       }
 
-      def scale(type=:short)
+      def million(type=:short)
         keys   = SCALE[:base].keys   + SCALE[type].keys
         values = SCALE[:base].values + SCALE[type].values
-        counts = self.odometer(*values)
+        counts = self.odometer(*values[0..-2])
 
         string = nil
         if self < 1_000
@@ -93,7 +90,7 @@ module Rafini
               d = (n<10)? 2 : (n<100)? 1 : 0
               n = (n + counts[i-1]/values[i-1].to_f).round(d)
             else
-              n = n.scale
+              n = n.million
             end
             string = "#{n}#{keys[i][0]}"
             break
