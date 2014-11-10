@@ -1,0 +1,18 @@
+#! ruby
+require 'test/unit'
+require 'rafini/hash'
+
+class TestHash < Test::Unit::TestCase
+  using Rafini::Hash
+
+  def test_to_struct
+    assert_nothing_raised() do
+      h = {a:'A',b:'B',c:'C'}
+      s = h.to_struct
+      assert_equal('A',s.a)
+      assert_equal('B',s.b)
+      assert_equal('C',s.c)
+      # Simple, what else you'd test?
+    end
+  end
+end
