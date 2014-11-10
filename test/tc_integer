@@ -8,24 +8,24 @@ class TestInteger < Test::Unit::TestCase
   def test_odometer
     assert_nothing_raised() do
 
-      a = 365.odometer(73,5,4,32,11,227,1)
-      assert_equal('0.0.1.0.0.0.0.0', a.join('.'))
+      a = 365.odometer(73,5,4,32,11,227)
+      assert_equal('0.0.1.0.0.0.0', a.join('.'))
 
       n = 73*5*4*32*11*227
-      a = n.odometer(73,5,4,32,11,227,1)
-      assert_equal('0.0.0.0.0.0.0.1', a.join('.'))
+      a = n.odometer(73,5,4,32,11,227)
+      assert_equal('0.0.0.0.0.0.1', a.join('.'))
 
-      a = (n-1).odometer(73,5,4,32,11,227,1)
-      assert_equal('72.4.3.31.10.226.0.0', a.join('.'))
+      a = (n-1).odometer(73,5,4,32,11,227)
+      assert_equal('72.4.3.31.10.226.0', a.join('.'))
 
-      a = (n+1).odometer(73,5,4,32,11,227,1)
-      assert_equal('1.0.0.0.0.0.0.1', a.join('.'))
+      a = (n+1).odometer(73,5,4,32,11,227)
+      assert_equal('1.0.0.0.0.0.1', a.join('.'))
 
-      a = (n+74).odometer(73,5,4,32,11,227,1)
-      assert_equal('1.1.0.0.0.0.0.1', a.join('.'))
+      a = (n+74).odometer(73,5,4,32,11,227)
+      assert_equal('1.1.0.0.0.0.1', a.join('.'))
 
-      a = (n*123).odometer(73,5,4,32,11,227,1)
-      assert_equal('0.0.0.0.0.0.0.123', a.join('.'))
+      a = (n*123).odometer(73,5,4,32,11,227)
+      assert_equal('0.0.0.0.0.0.123', a.join('.'))
     end
   end
 end
