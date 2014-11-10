@@ -4,7 +4,6 @@ module Rafini
       def odometer(*p)
         n = self
         m = p.inject(1,:*)
-        raise "Busted the odometer" if n>m
         r = []
 
         (p.length-1).downto(0) do |i|
