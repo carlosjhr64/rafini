@@ -1,8 +1,10 @@
 module Rafini
   module Odometers
     refine ::Integer do
-
-      [Integer, String, Hash, Array].each{|mod| using mod}
+      # Need Rafini::Integer for #odometer
+      # Need Rafini::Hash for #to_struct
+      # Need Rafini::Array for #per
+      [Rafini::Integer, Rafini::Hash, Rafini::Array].each{|mod| using mod}
 
       SEC2TIME = {
           second:     60,
@@ -13,27 +15,25 @@ module Rafini
           month:      13,
           year:       10,
           decade:     10,
-          century:    10,
+          centurie:   10,
           millennium: 10,
           age:        10,
           epoch:      10,
           era:        5,
           eon:        2,
-          gigaannum:  100,
-          bust:       1,
-          # ...and it's broken!  :))
+          gigaannum:  nil,
       }
 
-      def sec2time(scale=SEC2TIME)
+      def odometer_reader(scale)
         values = scale.values
-        keys = scale.keys
-        counts = self.odometer(*values)
+        keys = scale.keys;
+        counts = self.odometer(*values[0..-2])
 
         string = "#{counts[0]} #{keys[0]}#{(counts[0]==1)? '' : 's'}"
         (keys.length-1).downto(1) do |i|
           if counts[i] > 0
             string = "#{counts[i]} #{keys[i]}#{(counts[i]>1)? 's' : ''}"
-            string << ", #{counts[i-1]} #{keys[i-1]}#{(counts[i-1]>1)? 's' : ''}" if counts[i-1]>0
+            string << " and #{counts[i-1]} #{keys[i-1]}#{(counts[i-1]>1)? 's' : ''}" if counts[i-1]>0
             break
           end
         end
@@ -43,6 +43,10 @@ module Rafini
         hash[:to_s]=string
 
         return hash.to_struct
+      end
+
+      def sec2time
+        self.odometer_reader(SEC2TIME)
       end
 
       SCALE = {

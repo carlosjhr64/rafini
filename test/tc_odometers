@@ -1,0 +1,54 @@
+#! ruby
+require 'test/unit'
+require 'rafini/integer'
+require 'rafini/hash'
+require 'rafini/array'
+require 'rafini/odometers'
+
+class TestOdometers < Test::Unit::TestCase
+  using Rafini::Odometers
+
+  def test_sec2time_to_s
+    assert_nothing_raised() do
+      assert_equal '10 seconds', 10.sec2time.to_s
+      assert_equal '1 minute and 40 seconds', 100.sec2time.to_s
+      assert_equal '16 minutes and 41 seconds', 1_001.sec2time.to_s
+      assert_equal '2 hours and 46 minutes', 10_000.sec2time.to_s
+      assert_equal '1 day and 3 hours', 100_000.sec2time.to_s
+      assert_equal '1 week and 4 days', 1_000_000.sec2time.to_s
+      assert_equal '4 months', 10_000_000.sec2time.to_s
+      assert_equal '3 years and 2 months', 100_000_000.sec2time.to_s
+      assert_equal '3 decades and 1 year', 1_000_000_000.sec2time.to_s
+      assert_equal '3 centuries and 1 decade', 10_000_000_000.sec2time.to_s
+      assert_equal '3 millenniums and 1 centurie', 100_000_000_000.sec2time.to_s
+      assert_equal '3 ages and 1 millennium', 1_000_000_000_000.sec2time.to_s
+      assert_equal '3 epochs and 1 age', 10_000_000_000_000.sec2time.to_s
+      assert_equal '3 eras and 1 epoch', 100_000_000_000_000.sec2time.to_s
+      assert_equal '1 eon and 4 eras', 300_000_000_000_000.sec2time.to_s
+      assert_equal '3 gigaannums', 1_000_000_000_000_000.sec2time.to_s
+      assert_equal '31 gigaannums and 1 eon', 10_000_000_000_000_000.sec2time.to_s
+    end
+  end
+
+  def test_sec2time_to_struct
+    assert_nothing_raised() do
+      assert_equal 10, 10.sec2time.second
+      assert_equal 1, 100.sec2time.minute
+      assert_equal 41, 1_001.sec2time.second
+      assert_equal 2, 10_000.sec2time.hour
+      assert_equal 1, 100_000.sec2time.day
+      assert_equal 1, 1_000_000.sec2time.week
+      assert_equal 4, 10_000_000.sec2time.month
+      assert_equal 3, 100_000_000.sec2time.year
+      assert_equal 3, 1_000_000_000.sec2time.decade
+      assert_equal 3, 10_000_000_000.sec2time.centurie
+      assert_equal 3, 100_000_000_000.sec2time.millennium
+      assert_equal 3, 1_000_000_000_000.sec2time.age
+      assert_equal 3, 10_000_000_000_000.sec2time.epoch
+      assert_equal 3, 100_000_000_000_000.sec2time.era
+      assert_equal 1, 300_000_000_000_000.sec2time.eon
+      assert_equal 3, 1_000_000_000_000_000.sec2time.gigaannum
+      assert_equal 1, 10_000_000_000_000_000.sec2time.eon
+    end
+  end
+end
