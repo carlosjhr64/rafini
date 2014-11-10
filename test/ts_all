@@ -16,7 +16,8 @@ if tc('array')     and
    tc('rafini')    and
    tc('hash')      and
    tc('string')    and
-   tc('integer')
+   tc('integer')   and
+   tc('odometers')
 
   puts 'All tests passed!'
   File.unlink LOG
