@@ -1,10 +1,17 @@
 module Rafini
   module Exception
     refine ::Exception do
-      # bang! outputs to standard error what went bang!
-      # Message is what you normally want to see.
+
+      # $!.puts outputs to standard error what went bang!
+      # The given message is what you normally want to see.
       # The exeption message is also shown if in verbose mode.
-      # Bactrace is shown if in debug mode.
+      # Backtrace is shown if in debug mode.
+      #   begin
+      #     raise 'Ugly message'
+      #   rescue RuntimeError
+      #     # exact output depends on $VERBOSE and $DEBUG
+      #     $!.puts('Nice message')
+      #   end
       def puts(message=nil)
         unless $VERBOSE.nil? then
           $stderr.puts message if message
@@ -16,8 +23,13 @@ module Rafini
   end
 end
 
-# Module version of bang!
 using Rafini::Exception
+
+# Module version of puts bang!
+# Returns either the value or error of the block.
+#   value = Rafini.bang!('Ooops! Not perfect?') do
+#     # Perfect code here...
+#   end
 def Rafini.bang!(message=nil, bang=Exception, &block)
   value = nil
   begin

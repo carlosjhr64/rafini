@@ -45,32 +45,52 @@ module Rafini
           gigaannum:  nil,
       }
 
+      # Integer#sec2time
+      # Returns a struct with the different time scales for number of seconds.
+      # Note that the month(4 weeks)/year(13 months) are not meant to be exact.
+      #   10_000.sec2time.to_s #=> "2 hours and 46 minutes"
+      #   10_000.sec2time.hour #=> 2
       def sec2time
         self.odoread(SEC2TIME)
       end
 
       SCALE = {
         base: {
-          One:         10,
-          Ten:         10,
-          Hundred:     10,
-          Thousand:    1_000,
+          ones:         10,
+          tens:         10,
+          hundreds:     10,
+          thousands:    1_000,
         },
         short: {
-          Million:     1_000,
-          Billion:     1_000,
-          Trillion:    1_000,
-          Quadrillion: nil,
+          millions:     1_000,
+          billions:     1_000,
+          trillions:    1_000,
+          quadrillions: nil,
         },
         long: {
-          Million:     1_000_000,
-          Billion:     1_000_000,
-          Trillion:    1_000_000,
-          Quadrillion: nil,
+          millions:     1_000_000,
+          billions:     1_000_000,
+          trillions:    1_000_000,
+          quadrillions: nil,
         },
       }
 
-      def million(type=:short)
+      # 1_230.illion.to_s #=> "1.23k"
+      # 1_230_000.illion.to_s #=> "1.23M"
+      # ...etc
+      # Does both short and long scales, short by default.
+      # Returns a struct with the different scales of the number
+      #   m = 888_777_666_555_444_321.illion
+      #   m.ones #=> 1
+      #   m.tens #=> 2
+      #   m.hundreds #=> 3
+      #   m.thousands #=> 444
+      #   m.millions #=> 555
+      #   m.billions #=> 666
+      #   m.trillions #=> 777
+      #   m.quadrillions #=> 888
+      #   m.to_s #=> "888Q" It rounds up 888.7!
+      def illion(type=:short)
         keys   = SCALE[:base].keys   + SCALE[type].keys
         values = SCALE[:base].values + SCALE[type].values
         counts = self.odometer(*values[0..-2])
@@ -90,9 +110,9 @@ module Rafini
               d = (n<10)? 2 : (n<100)? 1 : 0
               n = (n + counts[i-1]/values[i-1].to_f).round(d)
             else
-              n = n.million
+              n = n.illion
             end
-            string = "#{n}#{keys[i][0]}"
+            string = "#{n}#{keys[i][0].upcase}"
             break
           end
         end
