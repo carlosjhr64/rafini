@@ -1,0 +1,4 @@
+*.swp
+test/error.log
+rafini-*.*.*.gem
+pkg
