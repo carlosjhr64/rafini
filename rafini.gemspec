@@ -24,10 +24,7 @@ SUMMARY
 
   s.require_paths = ["lib"]
   s.files = %w(
-.gemignore
-History.txt
 README.rdoc
-TODO.txt
 lib/rafini.rb
 lib/rafini/array.rb
 lib/rafini/exception.rb
@@ -36,7 +33,6 @@ lib/rafini/integer.rb
 lib/rafini/odometers.rb
 lib/rafini/string.rb
 lib/rafini/version.rb
-rafini.gemspec
   )
 
   s.requirements << 'ruby: ruby 2.1.3p242 (2014-09-19 revision 47630) [x86_64-linux]'
