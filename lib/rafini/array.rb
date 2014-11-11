@@ -10,10 +10,10 @@ module Rafini
       # it uses the value of the executed block, which is passed an iteration number.
       # Note that the iteration number starts at 1.
       # Lastly it uses an empty string.
-      #    ['a','b','c','d','e','f'].join('-', '-', ' '){':'} #=> 'a-b-c d:e:f'
-      #    ['a','b','c'].join{','} #=> 'a,b,c'
-      #    ['1','2','3'].join('.') #=> '1.23'
-      #    ['a','b','c'].join{|i|i} #=> 'a1b2c'
+      #    ['a','b','c','d','e','f'].joins('-', '-', ' '){':'} #=> 'a-b-c d:e:f'
+      #    ['a','b','c'].joins{','} #=> 'a,b,c'
+      #    ['1','2','3'].joins('.') #=> '1.23'
+      #    ['a','b','c'].joins{|i|i} #=> 'a1b2c'
       def joins(*p, &block)
         str = ''
         if length > 1
