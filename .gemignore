@@ -1,3 +1,7 @@
 ^(
+(\.)|
+(rafini.gemspec)|
+(History\.)|
+(TODO\.)|
 (test\/)
 )
