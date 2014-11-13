@@ -7,6 +7,7 @@ require 'rafini/integer'
 require 'rafini/string'
 
 require 'rafini/odometers'
+require 'rafini/empty'
 
 # Requires:
 #`ruby`
