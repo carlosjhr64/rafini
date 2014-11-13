@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
 
   s.name     = 'rafini'
-  s.version  = '0.0.0'
+  s.version  = '0.1.0'
 
   s.homepage = 'https://github.com/carlosjhr64/rafini'
 
   s.author   = 'carlosjhr64'
   s.email    = 'carlosjhr64@gmail.com'
 
-  s.date     = '2014-11-11'
+  s.date     = '2014-11-13'
   s.licenses = ['MIT']
 
   s.description = <<DESCRIPTION
@@ -27,6 +27,7 @@ SUMMARY
 README.rdoc
 lib/rafini.rb
 lib/rafini/array.rb
+lib/rafini/empty.rb
 lib/rafini/exception.rb
 lib/rafini/hash.rb
 lib/rafini/integer.rb
