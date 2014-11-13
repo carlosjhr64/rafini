@@ -15,4 +15,25 @@ class TestHash < Test::Unit::TestCase
       # Simple, what else you'd test?
     end
   end
+
+  def test_modify
+    assert_nothing_raised() do
+      h = {a:'A',b:'B'}.modify({b:'X',c:'C'},{c:'Y',d:'D'})
+      assert_equal({a:'A',b:'X',c:'Y',d:'D'}, h)
+    end
+  end
+
+  def test_supplement
+    assert_nothing_raised() do
+      h = {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'})
+      assert_equal({a:'A',b:'B',c:'C',d:'D'}, h)
+    end
+  end
+
+  def test_ammend
+    assert_nothing_raised() do
+      h = {a:'A',b:'B'}.ammend({b:'X',c:'C'},{c:'Y',d:'D'})
+      assert_equal({a:'A',b:'X'}, h)
+    end
+  end
 end
