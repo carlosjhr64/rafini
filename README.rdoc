@@ -43,6 +43,15 @@ Just a collection of useful refinements.
    struct = {a:'A',b:'C',c:'C'}.to_struct
    struct.a #=> 'A'
 
+   # modify
+   {a:'A',b:'B'}.modify({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'X',c:'Y',d:'D'}
+
+   # supplement
+   {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'B',c:'C',d:'D'}
+
+   # ammend
+   {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'X'}
+
 === using Rafini::Integer
 
    # odometer
