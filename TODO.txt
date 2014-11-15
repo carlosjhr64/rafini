@@ -1,3 +1,5 @@
 == File List
 
+TODO:	Empty::STRING
+	lib/rafini/empty.rb, #8
 
