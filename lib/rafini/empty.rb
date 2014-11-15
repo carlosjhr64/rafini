@@ -5,5 +5,6 @@ module Rafini
   module Empty
     ARRAY = [].freeze
     HASH  = {}.freeze
+    STRING = ''.freeze # TODO: Empty::STRING
   end
 end

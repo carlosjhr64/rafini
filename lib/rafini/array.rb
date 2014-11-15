@@ -37,6 +37,15 @@ module Rafini
         0.upto(length-1){|i| yield self[i], (b)? b[i] : i}
       end
 
+      # array.which{|a|...}
+      #
+      # Returns first object for which block is true.
+      # ['dog','cat','bunny'].which{|a|a=~/c/} #=> "cat"
+      def which
+        self.each{|obj| return obj if yield(obj)}
+        return nil
+      end
+
     end
   end
 end

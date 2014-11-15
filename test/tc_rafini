@@ -14,9 +14,10 @@ class TestRafini < Test::Unit::TestCase
       assert_equal Module, Rafini::Odometers.class
 
       # Some trivial tests
-      assert_equal '0.1.0', Rafini::VERSION
-      assert a=Rafini::Empty::ARRAY and a.empty? and a.frozen?
-      assert a=Rafini::Empty::HASH  and a.empty? and a.frozen?
+      assert_equal '0.2.0', Rafini::VERSION
+      assert a=Rafini::Empty::ARRAY  and a.empty? and a.frozen?
+      assert a=Rafini::Empty::HASH   and a.empty? and a.frozen?
+      assert a=Rafini::Empty::STRING and a.empty? and a.frozen?
     end
   end
 end
