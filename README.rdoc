@@ -16,6 +16,9 @@ Just a collection of useful refinements.
    ['a','b','c'].per(['A','B','C']){|l,u| h[l]=u}
    h #=> {'a'=>'A','b'=>'B','c'=>'C'}
 
+   # which
+   ['dog','cat','bunny'].which{|a|a=~/c/} #=> "cat"
+
 === using Rafini::Exception
 
    # $!.puts
@@ -70,6 +73,10 @@ Just a collection of useful refinements.
 
    # camelize
    'a_camel_kick'.camelize #=> "ACamelKick"
+
+=== Rafini::Empty
+
+   STRING, ARRAY, HASH = ''.frozen, [].frozen, {}.frozen
 
 == INSTALL:
 
