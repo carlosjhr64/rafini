@@ -3,3 +3,5 @@
 ad598bc3e3f7cf0415d46bef1c46a8f6  pkg/rafini-0.0.0.gem
 === 0.1.0 / 2014-11-13 09:16:00 -0800
 5f93fff164bf7b22f8c90ad2603fb37c  pkg/rafini-0.1.0.gem
+=== 0.2.0 / 2014-11-15 08:53:59 -0800
+7cd3611c594d23e836c4a3bcfa3e679b  pkg/rafini-0.2.0.gem
