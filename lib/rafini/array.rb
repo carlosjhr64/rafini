@@ -46,6 +46,14 @@ module Rafini
         return nil
       end
 
+      # [:a,:b,:c].is(true) #=> {:a=>true,:b=>true,:c=>true}
+      #
+      # Updates a hash with the keys given by the array to the given value.
+      def is(value, hash={})
+        self.each{|key| hash[key]=value}
+        return hash
+      end
+
     end
   end
 end

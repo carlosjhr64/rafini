@@ -45,4 +45,12 @@ class TestArray < Test::Unit::TestCase
     end
   end
 
+  def test_is
+    assert_nothing_raised() do
+      h = {a: false, b: false, c: false}
+      assert_equal({a: false, b: true, c: false, d: true}, [:b,:d].is(true,h))
+      assert_equal({b: true, d: true}, [:b,:d].is(true))
+    end
+  end
+
 end
