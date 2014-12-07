@@ -41,7 +41,7 @@ module Rafini
       # Ammends hash with hashes.
       # Overwrites existing elements only.
       #   {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'X'}
-      def ammend(*hashes)
+      def amend(*hashes)
         self.keys.each do |key|
           hashes.each do |hash|
             if hash.has_key?(key)
@@ -52,6 +52,7 @@ module Rafini
         end
         self
       end
+      alias ammend amend
 
     end
   end

@@ -30,9 +30,9 @@ class TestHash < Test::Unit::TestCase
     end
   end
 
-  def test_ammend
+  def test_amend
     assert_nothing_raised() do
-      h = {a:'A',b:'B'}.ammend({b:'X',c:'C'},{c:'Y',d:'D'})
+      h = {a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'})
       assert_equal({a:'A',b:'X'}, h)
     end
   end
