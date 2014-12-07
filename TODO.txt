@@ -1,3 +1,5 @@
 == File List
 
+TODO:	ammend was a typo, to go away on a major revision bump.
+	lib/rafini/hash.rb, #55
 
