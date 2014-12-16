@@ -53,4 +53,13 @@ class TestArray < Test::Unit::TestCase
     end
   end
 
+  def test_any
+    assert_nothing_raised() do
+      assert [:a,:b,:c].any?(:d,:b)
+      assert [:a,:b,:c].any?(:b,:d)
+      refute [:a,:b,:c].any?(:d,:e)
+      refute [:a,:b,:c].any?
+    end
+  end
+
 end
