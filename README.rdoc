@@ -22,9 +22,6 @@ Just a collection of useful refinements.
    # is
    [:a,:b,:c].is(true) #=> {a: true, b: true, c: true}
 
-   # any?
-   [:a,:b,:c].any?(:b,:d) #=> true
-
 === using Rafini::Exception
 
    # $!.puts
