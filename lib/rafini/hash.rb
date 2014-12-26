@@ -52,8 +52,6 @@ module Rafini
         end
         self
       end
-      # TODO: ammend was a typo, to go away on a major revision bump.
-      alias ammend amend
 
     end
   end

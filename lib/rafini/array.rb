@@ -54,16 +54,6 @@ module Rafini
         return hash
       end
 
-      # [:a, :b, :c].any?(:b, :d) #=> true
-      #
-      # Are any of the given in the array?
-      def any?(*a)
-        a.each do |b|
-          return true if include?(b)
-        end
-        return false
-      end
-
     end
   end
 end
