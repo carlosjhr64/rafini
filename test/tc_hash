@@ -36,4 +36,11 @@ class TestHash < Test::Unit::TestCase
       assert_equal({a:'A',b:'X'}, h)
     end
   end
+
+  def test_maps
+    assert_nothing_raised() do
+      a = {a:'A',b:'B',c:'C',d:'D'}.maps(:c,:a,:b)
+      assert_equal ['C','A','B'], a
+    end
+  end
 end

@@ -53,6 +53,13 @@ module Rafini
         self
       end
 
+      # hash.maps(key1,...)
+      #
+      # Maps parameters list with hash.
+      #    {a:'A",b:'B',c:'C'}.maps(:c,:a,:b) #=> ['C','A','B']
+      def maps(*keys)
+        keys.map{|_|self[_]}
+      end
     end
   end
 end
