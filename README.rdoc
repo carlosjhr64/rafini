@@ -58,6 +58,9 @@ Just a collection of useful refinements.
    # amend
    {a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'X'}
 
+   # maps
+   {a:'A',b:'B',c:'C',c:'D'}.maps(:c,:a,:b) #=> ['C','A','B']
+
 === using Rafini::Integer
 
    # odometer
