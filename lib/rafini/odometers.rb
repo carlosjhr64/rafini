@@ -1,5 +1,44 @@
 module Rafini
   module Odometers
+    SEC2TIME = {
+      second:     60,
+      minute:     60,
+      hour:       24,
+      day:        7,
+      week:       4,
+      month:      13,
+      year:       10,
+      decade:     10,
+      centurie:   10,
+      millennium: 10,
+      age:        10,
+      epoch:      10,
+      era:        5,
+      eon:        2,
+      gigaannum:  nil,
+    }
+
+    SCALE = {
+      base: {
+        ones:         10,
+        tens:         10,
+        hundreds:     10,
+        thousands:    1_000,
+      },
+      short: {
+        millions:     1_000,
+        billions:     1_000,
+        trillions:    1_000,
+        quadrillions: nil,
+      },
+      long: {
+        millions:     1_000_000,
+        billions:     1_000_000,
+        trillions:    1_000_000,
+        quadrillions: nil,
+      },
+    }
+
     refine ::Integer do
       # Need Rafini::Integer for #odometer
       # Need Rafini::Hash for #to_struct
@@ -27,24 +66,6 @@ module Rafini
         return hash.to_struct
       end
 
-      SEC2TIME = {
-          second:     60,
-          minute:     60,
-          hour:       24,
-          day:        7,
-          week:       4,
-          month:      13,
-          year:       10,
-          decade:     10,
-          centurie:   10,
-          millennium: 10,
-          age:        10,
-          epoch:      10,
-          era:        5,
-          eon:        2,
-          gigaannum:  nil,
-      }
-
       # Integer#sec2time
       # Returns a struct with the different time scales for number of seconds.
       # Note that the month(4 weeks)/year(13 months) are not meant to be exact.
@@ -53,27 +74,6 @@ module Rafini
       def sec2time
         self.odoread(SEC2TIME)
       end
-
-      SCALE = {
-        base: {
-          ones:         10,
-          tens:         10,
-          hundreds:     10,
-          thousands:    1_000,
-        },
-        short: {
-          millions:     1_000,
-          billions:     1_000,
-          trillions:    1_000,
-          quadrillions: nil,
-        },
-        long: {
-          millions:     1_000_000,
-          billions:     1_000_000,
-          trillions:    1_000_000,
-          quadrillions: nil,
-        },
-      }
 
       # 1_230.illion.to_s #=> "1.23k"
       # 1_230_000.illion.to_s #=> "1.23M"
