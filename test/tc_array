@@ -38,9 +38,9 @@ class TestArray < Test::Unit::TestCase
   def test_which
     assert_nothing_raised() do
       a = ['dog','cat','bunny','horse','pig','cow']
-      b = a.which{|a|a=~/n/}
+      b = a.which{|_|_=~/n/}
       assert_equal('bunny', b)
-      n = a.which{|a|a=~/q/}
+      n = a.which{|_|_=~/q/}
       assert_nil(n)
     end
   end
