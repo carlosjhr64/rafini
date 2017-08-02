@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
 
   s.name     = 'rafini'
-  s.version  = '1.2.0'
+  s.version  = '1.2.1'
 
   s.homepage = 'https://github.com/carlosjhr64/rafini'
 
   s.author   = 'carlosjhr64'
   s.email    = 'carlosjhr64@gmail.com'
 
-  s.date     = '2014-12-30'
+  s.date     = '2017-08-02'
   s.licenses = ['MIT']
 
   s.description = <<DESCRIPTION
@@ -20,9 +20,9 @@ Just a collection of useful refinements.
 SUMMARY
 
   s.extra_rdoc_files = ['README.rdoc']
-  s.rdoc_options     = ["--main", "README.rdoc"]
+  s.rdoc_options     = ['--main', 'README.rdoc']
 
-  s.require_paths = ["lib"]
+  s.require_paths = ['lib']
   s.files = %w(
 README.rdoc
 lib/rafini.rb
@@ -36,6 +36,6 @@ lib/rafini/string.rb
 lib/rafini/version.rb
   )
 
-  s.requirements << 'ruby: ruby 2.1.3p242 (2014-09-19 revision 47630) [x86_64-linux]'
+  s.requirements << 'ruby: ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-linux]'
 
 end
