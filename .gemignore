@@ -1,7 +1,9 @@
 ^(
-(\.)|
-(rafini.gemspec)|
-(History\.)|
-(TODO\.)|
-(test\/)
+ (\.)|
+ (examples\/)|
+ (test\/)|
+ (features\/)|
+ (TODO\.)|
+ (\w+\.gemspec)|
+ (History\.)
 )

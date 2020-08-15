@@ -13,6 +13,10 @@ class TestArray < Test::Unit::TestCase
       assert_equal('a,b.cd', a.joins(',','.'))
       assert_equal('a-b:c:d', a.joins('-'){':'})
       assert_equal('a1b2c3d', a.joins{|i|i})
+
+      assert_equal('', [].joins{'.'})
+      assert_equal('a', ['a'].joins{'.'})
+      assert_equal('a.b', ['a','b'].joins{'.'})
     end
   end
 

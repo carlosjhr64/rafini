@@ -16,7 +16,7 @@ module Rafini
       #    ['a','b','c'].joins{|i|i} #=> 'a1b2c'
       def joins(*p, &block)
         str = ''
-        if length > 1
+        if length > 0
           str << self[0]
           1.upto(length-1) do |i|
             str << (p.empty? ? (block ? block.call(i).to_s : '') : p.shift.to_s)
@@ -41,10 +41,7 @@ module Rafini
       #
       # Returns first object for which block is true.
       # ['dog','cat','bunny'].which{|a|a=~/c/} #=> "cat"
-      def which
-        self.each{|obj| return obj if yield(obj)}
-        return nil
-      end
+      alias which detect
 
       # [:a,:b,:c].is(true) #=> {:a=>true,:b=>true,:c=>true}
       #
@@ -53,7 +50,6 @@ module Rafini
         self.each{|key| hash[key]=value}
         return hash
       end
-
     end
   end
 end
