@@ -1,5 +1,5 @@
 module Rafini
-  VERSION = '1.2.1'
+  VERSION = '2.0.0'
   require 'rafini/array'
   require 'rafini/exception'
   require 'rafini/hash'
