@@ -1,7 +1,6 @@
 module Rafini
   module Exception
     refine ::Exception do
-
       # $!.puts outputs to standard error what went bang!
       # The given message is what you normally want to see.
       # The exeption message is also shown if in verbose mode.

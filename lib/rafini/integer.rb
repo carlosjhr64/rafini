@@ -1,7 +1,6 @@
 module Rafini
   module Integer
     refine ::Integer do
-
       # odometer
       # Kinda hard to explain...
       #   123.odometer(10,10) #=> [3,2,1]

@@ -1,7 +1,6 @@
 module Rafini
   module Hash
     refine ::Hash do
-
       # struct = hash.to_struct
       # Why not?
       def to_struct

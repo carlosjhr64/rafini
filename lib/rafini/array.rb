@@ -1,7 +1,6 @@
 module Rafini
   module Array
     refine ::Array do
-
       # string = array.joins(sep1,sep2,sep3,...){|i| sep[i]}
       #
       # Returns a string created by converting each element of the array to
