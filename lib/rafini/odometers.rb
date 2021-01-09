@@ -1,3 +1,7 @@
+require 'rafini/integer'
+require 'rafini/hash'
+require 'rafini/array'
+
 module Rafini
   module Odometers
     SEC2TIME = {

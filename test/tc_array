@@ -12,11 +12,21 @@ class TestArray < Test::Unit::TestCase
       assert_equal('axbyczd', a.joins(*x))
       assert_equal('a,b.cd', a.joins(',','.'))
       assert_equal('a-b:c:d', a.joins('-'){':'})
-      assert_equal('a1b2c3d', a.joins{|i|i})
 
       assert_equal('', [].joins{'.'})
       assert_equal('a', ['a'].joins{'.'})
       assert_equal('a.b', ['a','b'].joins{'.'})
+
+      assert_equal(
+        '1<9>2<8>3<7>4<6>5=5',
+        [1,9,2,8,3,7,4,6,5,5].joins{|a,b|a>b ? '>': a<b ? '<': '='})
+      assert_equal(
+        ['2021','Jan','09','07','29','05'].joins('-', '-', ' '){':'},
+        '2021-Jan-09 07:29:05')
+      assert_equal(
+        'a-1+2.b,c',
+        [:a,[1,2],[:b,'c']].joins(['-','+'],'.'){','})
+      assert_equal('3.14159', [3,1,4,1,5,9].joins('.'))
     end
   end
 
@@ -39,16 +49,6 @@ class TestArray < Test::Unit::TestCase
     end
   end
 
-  def test_which
-    assert_nothing_raised() do
-      a = ['dog','cat','bunny','horse','pig','cow']
-      b = a.which{|_|_=~/n/}
-      assert_equal('bunny', b)
-      n = a.which{|_|_=~/q/}
-      assert_nil(n)
-    end
-  end
-
   def test_is
     assert_nothing_raised() do
       h = {a: false, b: false, c: false}
@@ -56,5 +56,4 @@ class TestArray < Test::Unit::TestCase
       assert_equal({b: true, d: true}, [:b,:d].is(true))
     end
   end
-
 end

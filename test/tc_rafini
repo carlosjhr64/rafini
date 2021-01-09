@@ -15,7 +15,7 @@ class TestRafini < Test::Unit::TestCase
       assert_equal Module, Rafini::Empty.class
 
       # Some trivial tests
-      assert_equal '2.0.0', Rafini::VERSION
+      assert_equal '3.0.210109', Rafini::VERSION
       assert a=Rafini::Empty::ARRAY  and a.empty? and a.frozen?
       assert a=Rafini::Empty::HASH   and a.empty? and a.frozen?
       assert a=Rafini::Empty::STRING and a.empty? and a.frozen?

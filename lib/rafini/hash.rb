@@ -4,7 +4,7 @@ module Rafini
       # struct = hash.to_struct
       # Why not?
       def to_struct
-        Struct.new(*self.keys).new(*self.values)
+        Struct.new(*keys).new(*values)
       end
 
       # hash0.modify(hash1,...) #=> hash

@@ -1,4 +1,4 @@
-# rafini 2.0.0
+# rafini 3.0.210109
 
 ## DESCRIPTION:
 
@@ -8,94 +8,138 @@ Just a collection of useful refinements.
 
 ### using Rafini::Array
 
-    # joins
-    ['a','b','c','d','e','f'].joins('-','-',' '){':'} #=> "a-b-c d:e:f"
+```ruby
+require 'rafini/array'
+using Rafini::Array
 
-    # per
-    h={}
-    ['a','b','c'].per(['A','B','C']){|l,u| h[l]=u}
-    h #=> {'a'=>'A','b'=>'B','c'=>'C'}
+# joins
+['a','b','c','d','e','f'].joins('-','-',' '){':'}
+#=> "a-b-c d:e:f"
 
-    # which
-    ['dog','cat','bunny'].which{|a|a=~/c/} #=> "cat"
+# per
+h={}
+['a','b','c'].per(['A','B','C']){|l,u| h[l]=u}
+h #=> {"a"=>"A", "b"=>"B", "c"=>"C"}
 
-    # is
-    [:a,:b,:c].is(true) #=> {a: true, b: true, c: true}
+# is
+[:a,:b,:c].is(true)
+#=> {:a=>true, :b=>true, :c=>true}
+```
 
 ### using Rafini::Exception
 
-    # $!.puts
-    begin
-      raise 'Ugly Message'
-    rescue RuntimeError
-      $!.puts 'Nice Message'
-    end
+```ruby
+require 'rafini/exception'
+using Rafini::Exception
 
-    # Rafini.bang!
-    value = Rafini.bang!('Nice Message') do
-      raise 'Ugly Message'
-    end
-    value #=> return value of block or error object
+# $!.puts
+# Normally stderr.puts your "Nice" message.
+# Additionally puts your "Ugly" message when $VERBOSE.
+# Additionally puts backtrace when $DEBUG
+# No output when $VERBOSE is nil.
+begin
+  raise 'Ugly Message'
+rescue RuntimeError
+  $!.puts 'Nice Message'
+end
 
-    # Rafini.thread_bang!
-    Rafini.thread_bang!('Nice Message') do
-      # this is in a thread
-      raise 'Ugly Message'
-    end
+# Rafini.bang!
+error = Rafini.bang!('Nice Message') do
+  raise 'Ugly Message'
+  # Outputs as $!.puts "Nice Message"
+end
+error.class #=> RuntimeError
+error.to_s  #=> "Ugly Message"
+
+# Rafini.thread_bang!
+Rafini.thread_bang!('Nice Message') do
+  # this is in a thread
+  raise 'Ugly Message'
+end
+```
 
 ### using Rafini::Hash
 
-    # to_struc
-    struct = {a:'A',b:'C',c:'C'}.to_struct
-    struct.a #=> 'A'
+```ruby
+require 'rafini/hash'
+using Rafini::Hash
 
-    # modify
-    {a:'A',b:'B'}.modify({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'X',c:'Y',d:'D'}
+# to_struc
+struct = {a:'A',b:'C',c:'C'}.to_struct
+struct   #=> #<struct a="A", b="C", c="C">
+struct.a #=> "A"
 
-    # supplement
-    {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'B',c:'C',d:'D'}
+# modify
+{a:'A',b:'B'}.modify({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"X", :c=>"Y", :d=>"D"}
 
-    # amend
-    {a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'X'}
+# supplement
+{a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"B", :c=>"C", :d=>"D"}
 
-    # maps
-    {a:'A',b:'B',c:'C',c:'D'}.maps(:c,:a,:b) #=> ['C','A','B']
+# amend
+{a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"X"}
+
+# maps
+{a:'A',b:'B',c:'C',d:'D'}.maps(:c,:a,:b) #=> ["C", "A", "B"]
+```
 
 ### using Rafini::Integer
 
-    # odometer
-    123.odometer(10,10) #=> [3,2,1]
-    30.odometer(2,3,5) #=> [0,0,0,1]
+```ruby
+require 'rafini/integer'
+using Rafini::Integer
+
+# odometer
+123.odometer(10,10) #=> [3, 2, 1]
+30.odometer(2,3,5)  #=> [0, 0, 0, 1]
+```
 
 ### using Rafini::Odometers
 
-    # sec2time
-    12501.sec2time.to_s #=> "3 hours and 28 minutes"
+```ruby
+require 'rafini/odometers'
+using Rafini::Odometers
 
-    # illion
-    3_512_325.illion.to_s #=> "3.51M"
+# sec2time
+12501.sec2time.to_s #=> "3 hours and 28 minutes"
+
+# illion
+3_512_325.illion.to_s #=> "3.51M"
+```
 
 ### using Rafini::String
 
-    # camelize
-    'a_camel_kick'.camelize #=> "ACamelKick"
+```ruby
+require 'rafini/string'
+using Rafini::String
 
-    # semantic
-    '1.2.3'.semantic(0..1) #=> '1.2'
+# camelize
+'a_camel_kick'.camelize #=> "ACamelKick"
+
+# semantic
+'1.2.3'.semantic(0..1) #=> "1.2"
+```
 
 ### Rafini::Empty
 
-    STRING, ARRAY, HASH = ''.frozen, [].frozen, {}.frozen
+```ruby
+require 'rafini/empty'
+Rafini::Empty::STRING       #=> ""
+Rafini::Empty::ARRAY        #=> []
+Rafini::Empty::HASH         #=> {}
+Rafini::Empty::HASH.frozen? #=> true
+```
 
 ## INSTALL:
 
-    $ gem install rafini
+```shell
+$ gem install rafini
+```
 
 ## LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2020 carlosjhr64
+Copyright (c) 2021 carlosjhr64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

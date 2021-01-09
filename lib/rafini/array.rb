@@ -1,28 +1,33 @@
 module Rafini
   module Array
     refine ::Array do
-      # string = array.joins(sep1,sep2,sep3,...){|i| sep[i]}
+      # type _AToS = ::Array[(_AToS|_ToS)]
+      # _AToS#joins(*_AToS seps)?{(_ToS,_ToS)->_ToS}
       #
-      # Returns a string created by converting each element of the array to
-      # a string, separated by the given separators.
+      # Returns a string created by joining the elements of the (flatten) array,
+      # separated by the given (flatten) separators.
       # If no separators are given or are used up,
-      # it uses the value of the executed block, which is passed an iteration number.
-      # Note that the iteration number starts at 1.
+      # it uses the value of the executed block, which is passed the next neigboring iteration items.
       # Lastly it uses an empty string.
-      #    ['a','b','c','d','e','f'].joins('-', '-', ' '){':'} #=> 'a-b-c d:e:f'
-      #    ['a','b','c'].joins{','} #=> 'a,b,c'
-      #    ['1','2','3'].joins('.') #=> '1.23'
-      #    ['a','b','c'].joins{|i|i} #=> 'a1b2c'
-      def joins(*p, &block)
-        str = ''
-        if length > 0
-          str << self[0]
-          1.upto(length-1) do |i|
-            str << (p.empty? ? (block ? block.call(i).to_s : '') : p.shift.to_s)
-            str << self[i]
-          end
+      #    ['2021','Jan','09','07','29','05'].joins('-', '-', ' '){':'}
+      #    #=> "2021-Jan-09 07:29:05"
+      #    [:a,[1,2],:b].joins{','} #=> 'a,1,2,b'
+      #    [3,1,4,1,5,9].joins('.') #=> '3.14159'
+      #    [1,9,2,8,3,7,4,6,5,5].joins{|a,b|a>b ? '>': a<b ? '<': '='}
+      #    #=> "1<9>2<8>3<7>4<6>5=5"
+      def joins(*seps, &block)
+        return '' if length < 1
+        items = flatten
+        previous = items.shift
+        string = ::String.new previous.to_s
+        return string if items.empty?
+        seps.flatten!
+        while item = items.shift
+          sep = seps.shift&.to_s || block&.call(previous,item).to_s and string << sep
+          string << item.to_s
+          previous = item
         end
-        return str
+        return string
       end
 
       # array1.per(array2){|obj1, obj2| ... }
@@ -33,20 +38,14 @@ module Rafini
       #   ['a','b','c'].per(['A','B','C']){|l,n| h[l]=n} # h=={'a'=>'A','b'=>'B','c'=>'C'}
       #   ['a','b','c'].per{|l,i| h[l]=i} # h=={'a'=>0,'b'=>1,'c'=>2}
       def per(b=nil)
-        0.upto(length-1){|i| yield self[i], (b)? b[i] : i}
+        each_with_index{|item,i| yield item, b ? b[i] : i}
       end
-
-      # array.which{|a|...}
-      #
-      # Returns first object for which block is true.
-      # ['dog','cat','bunny'].which{|a|a=~/c/} #=> "cat"
-      alias which detect
 
       # [:a,:b,:c].is(true) #=> {:a=>true,:b=>true,:c=>true}
       #
       # Updates a hash with the keys given by the array to the given value.
       def is(value, hash={})
-        self.each{|key| hash[key]=value}
+        each{|key| hash[key]=value}
         return hash
       end
     end
