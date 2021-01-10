@@ -8,7 +8,7 @@ module Rafini
       # separated by the given (flatten) separators.
       # If no separators are given or are used up,
       # it uses the value of the executed block, which is passed the next neigboring iteration items.
-      # Lastly it uses an empty string.
+      # Else, it just joins the items.
       #    ['2021','Jan','09','07','29','05'].joins('-', '-', ' '){':'}
       #    #=> "2021-Jan-09 07:29:05"
       #    [:a,[1,2],:b].joins{','} #=> 'a,1,2,b'

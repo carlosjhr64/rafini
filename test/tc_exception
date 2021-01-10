@@ -1,6 +1,5 @@
 #! ruby
 require 'stringio'
-require 'thread'
 require 'test/unit'
 require 'rafini/exception'
 
@@ -28,6 +27,7 @@ class TestRafini < Test::Unit::TestCase
       begin
         raise 'BANG!'
       rescue Exception
+        # Nice Bang! given
         out = TestRafini.capture_stderr{ $!.puts('Bang!') }
       end
       assert_not_nil(out)
@@ -40,6 +40,7 @@ class TestRafini < Test::Unit::TestCase
       begin
         raise 'BANG!'
       rescue Exception
+        # No nice message given, gives ugly BANG!
         out = TestRafini.capture_stderr{ $!.puts }
       end
       assert_not_nil(out)
@@ -50,6 +51,7 @@ class TestRafini < Test::Unit::TestCase
     assert_nothing_raised() do
       out = nil
       begin
+        # quiet mode, give no error messages.
         $VERBOSE = nil
         raise 'BANG!'
       rescue Exception
@@ -65,6 +67,7 @@ class TestRafini < Test::Unit::TestCase
     assert_nothing_raised() do
       out = nil
       begin
+        # verbose mode, gives both nice and ugly.
         $VERBOSE = true
         raise 'BANG!'
       rescue Exception
@@ -80,6 +83,7 @@ class TestRafini < Test::Unit::TestCase
     assert_nothing_raised() do
       out = nil
       begin
+        # Debug mode will additionally give backtrace
         $DEBUG = true
         raise 'BANG!'
       rescue Exception
@@ -140,14 +144,14 @@ class TestRafini < Test::Unit::TestCase
   end
 
   def test_thread_bang!
-    $VEBOSE=nil
+    $VERBOSE=nil
     assert_nothing_raised() do
       thread = Rafini.thread_bang!{raise 'BANG!'}
       assert_equal(RuntimeError, thread.value.class)
       thread = Rafini.thread_bang!{'OK'}
       assert_equal('OK', thread.value)
     end
-    $VEBOSE=false
+    $VERBOSE=false
   end
 
 end
