@@ -7,26 +7,12 @@ module Rafini
         Struct.new(*keys).new(*values)
       end
 
-      # hash0.modify(hash1,...) #=> hash
-      #
-      # Updates hash with hashes.
-      # Overwrites existing elements and adds elements.
-      #    {a:'A',b:'B'}.modify({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'X',c:'Y',d:'D'}
-      def modify(*hashes)
-        hashes.each do |hash|
-          hash.each do |key, value|
-            self[key] = value
-          end
-        end
-        self
-      end
-
-      # hash0.supplement(hash1,...) #=> hash
+      # hash0.supplement!(hash1,...) #=> hash
       #
       # Supplements hash with hashes.
       # Adds missing elements only.
       #   {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'B',c:'C',d:'D'}
-      def supplement(*hashes)
+      def supplement!(*hashes)
         hashes.each do |hash|
           hash.each do |key, value|
             self[key] = value unless self.has_key?(key)
@@ -34,30 +20,23 @@ module Rafini
         end
         self
       end
+      def supplement(...)
+        self.dup.supplement!(...)
+      end
 
-      # hash0.ammend(hash1,...)
+      # hash0.amend(hash1,...)
       #
       # Ammends hash with hashes.
-      # Overwrites existing elements only.
-      #   {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'X'}
-      def amend(*hashes)
-        self.keys.each do |key|
-          hashes.each do |hash|
-            if hash.has_key?(key)
-              self[key] = hash[key]
-              break
-            end
-          end
+      # Overwrites existing keys only with first key value found in amending hashes.
+      #   {a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'X'}
+      def amend!(*hashes)
+        self.each_key do |key|
+          value=hashes.find{_1.has_key? key}&.fetch(key) and self[key]=value
         end
         self
       end
-
-      # hash.maps(key1,...)
-      #
-      # Maps parameters list with hash.
-      #    {a:'A",b:'B',c:'C'}.maps(:c,:a,:b) #=> ['C','A','B']
-      def maps(*keys)
-        keys.map{|_|self[_]}
+      def amend(...)
+        self.dup.amend!(...)
       end
     end
   end

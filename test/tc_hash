@@ -16,31 +16,30 @@ class TestHash < Test::Unit::TestCase
     end
   end
 
-  def test_modify
-    assert_nothing_raised() do
-      h = {a:'A',b:'B'}.modify({b:'X',c:'C'},{c:'Y',d:'D'})
-      assert_equal({a:'A',b:'X',c:'Y',d:'D'}, h)
-    end
-  end
-
   def test_supplement
     assert_nothing_raised() do
-      h = {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'})
-      assert_equal({a:'A',b:'B',c:'C',d:'D'}, h)
+      h0 = {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'})
+      assert_equal({a:'A',b:'B',c:'C',d:'D'}, h0)
+      h = h0.supplement({a:'Aye',x:'X'})
+      refute h==h0
+      assert_equal({a:'A',b:'B',c:'C',d:'D'}, h0) # unchanged
+      assert_equal({a:'A',b:'B',c:'C',d:'D',x:'X'}, h)
+      h0.supplement!({a:'Aye',x:'X'})
+      assert h==h0
     end
   end
 
   def test_amend
     assert_nothing_raised() do
-      h = {a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'})
-      assert_equal({a:'A',b:'X'}, h)
+      h0 = {a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'})
+      assert_equal({a:'A',b:'X'}, h0)
+      h = h0.amend({a:'Aye'},{a:'Ah'})
+      refute h==h0
+      assert_equal({a:'A',b:'X'}, h0) # unchanged
+      assert_equal({a:'Aye',b:'X'}, h)
+      h0.amend!({a:'Aye'},{a:'Ah'})
+      assert h==h0
     end
   end
 
-  def test_maps
-    assert_nothing_raised() do
-      a = {a:'A',b:'B',c:'C',d:'D'}.maps(:c,:a,:b)
-      assert_equal ['C','A','B'], a
-    end
-  end
 end

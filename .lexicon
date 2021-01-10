@@ -1,4 +1,4 @@
-_
+_1
 age
 amend
 Array
@@ -18,7 +18,9 @@ d
 day
 decade
 downto
+dup
 each
+each_key
 each_with_index
 empty
 Empty
@@ -27,6 +29,8 @@ epoch
 era
 Exception
 f
+fetch
+find
 flatten
 freeze
 gigaannum
@@ -54,13 +58,11 @@ length
 long
 m
 map
-maps
 message
 millennium
 millions
 minute
 mod
-modify
 month
 n
 new

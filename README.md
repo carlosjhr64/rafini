@@ -69,17 +69,11 @@ struct = {a:'A',b:'C',c:'C'}.to_struct
 struct   #=> #<struct a="A", b="C", c="C">
 struct.a #=> "A"
 
-# modify
-{a:'A',b:'B'}.modify({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"X", :c=>"Y", :d=>"D"}
-
 # supplement
 {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"B", :c=>"C", :d=>"D"}
 
 # amend
 {a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"X"}
-
-# maps
-{a:'A',b:'B',c:'C',d:'D'}.maps(:c,:a,:b) #=> ["C", "A", "B"]
 ```
 
 ### using Rafini::Integer
