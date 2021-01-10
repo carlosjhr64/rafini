@@ -1,12 +1,12 @@
 module Rafini
   VERSION = '3.0.210110'
-  require 'rafini/array'
-  require 'rafini/exception'
-  require 'rafini/hash'
-  require 'rafini/integer'
-  require 'rafini/string'
-  require 'rafini/odometers'
-  require 'rafini/empty'
+  autoload :Array,     'rafini/array'
+  autoload :Exception, 'rafini/exception'
+  autoload :Hash,      'rafini/hash'
+  autoload :Integer,   'rafini/integer'
+  autoload :String,    'rafini/string'
+  autoload :Odometers,  'rafini/odometers'
+  autoload :Empty,      'rafini/empty'
 end
 # Requires:
 #`ruby`

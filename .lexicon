@@ -3,6 +3,7 @@ age
 amend
 Array
 ARRAY
+autoload
 b
 backtrace
 bang
@@ -82,7 +83,6 @@ refine
 require
 round
 Ruby30
-s
 scale
 SCALE
 sec2time
@@ -99,7 +99,6 @@ String
 STRING
 Struct
 supplement
-sx
 tens
 thousands
 Thread
@@ -117,6 +116,5 @@ value
 values
 VERSION
 week
-word
 y
 year

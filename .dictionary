@@ -1,6 +1,7 @@
 ACamelKick
 Ammends
 AToS
+autoload
 backtrace
 Backtrace
 camelize
@@ -30,7 +31,6 @@ struc
 struct
 Struct
 sublicense
-sx
 ToS
 unshift
 upcase
