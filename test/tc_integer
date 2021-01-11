@@ -26,6 +26,9 @@ class TestInteger < Test::Unit::TestCase
 
       a = (n*123).odometer(73,5,4,32,11,227)
       assert_equal('0.0.0.0.0.0.123', a.join('.'))
+
+      a = (373).odometer(7,365, factors:false)
+      assert_equal('1.1.1', a.join('.'))
     end
   end
 end
