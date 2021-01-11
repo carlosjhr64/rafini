@@ -16,11 +16,6 @@ using Rafini::Array
 ['a','b','c','d','e','f'].joins('-','-',' '){':'}
 #=> "a-b-c d:e:f"
 
-# per
-h={}
-['a','b','c'].per(['A','B','C']){|l,u| h[l]=u}
-h #=> {"a"=>"A", "b"=>"B", "c"=>"C"}
-
 # is
 [:a,:b,:c].is(true)
 #=> {:a=>true, :b=>true, :c=>true}

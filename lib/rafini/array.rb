@@ -30,17 +30,6 @@ module Rafini
         return string
       end
 
-      # array1.per(array2){|obj1, obj2| ... }
-      #
-      # Gives the block each two elements of two array respectively.
-      # If the second array is not given, it passes the block the index number instead.
-      #   h={} # say you have a hash h, then
-      #   ['a','b','c'].per(['A','B','C']){|l,n| h[l]=n} # h=={'a'=>'A','b'=>'B','c'=>'C'}
-      #   ['a','b','c'].per{|l,i| h[l]=i} # h=={'a'=>0,'b'=>1,'c'=>2}
-      def per(b=nil)
-        each_with_index{|item,i| yield item, b ? b[i] : i}
-      end
-
       # [:a,:b,:c].is(true) #=> {:a=>true,:b=>true,:c=>true}
       #
       # Updates a hash with the keys given by the array to the given value.

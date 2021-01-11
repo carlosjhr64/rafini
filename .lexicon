@@ -4,7 +4,6 @@ amend
 Array
 ARRAY
 autoload
-b
 backtrace
 bang
 base
@@ -23,7 +22,6 @@ downto
 dup
 each
 each_key
-each_with_index
 empty
 Empty
 eon
@@ -52,7 +50,6 @@ item
 items
 join
 joins
-k
 key
 keys
 length
@@ -72,7 +69,6 @@ Odometers
 odoread
 ones
 p
-per
 previous
 puts
 q

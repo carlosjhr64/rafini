@@ -1,6 +1,5 @@
 require 'rafini/integer'
 require 'rafini/hash'
-require 'rafini/array'
 
 module Rafini
   module Odometers
@@ -44,10 +43,8 @@ module Rafini
     }
 
     refine ::Integer do
-      # Need Rafini::Integer for #odometer
-      # Need Rafini::Hash for #to_struct
-      # Need Rafini::Array for #per
-      [Rafini::Integer, Rafini::Hash, Rafini::Array].each{using _1}
+      using Rafini::Integer # Need Rafini::Integer for #odometer
+      using Rafini::Hash    # Need Rafini::Hash for #to_struct
 
       def odoread(scale)
         counts = odometer(*scale.values[0..-2])
@@ -123,8 +120,7 @@ module Rafini
           end
         end
 
-        hash = {}
-        keys.per(counts){|k,v| hash[k]=v}
+        hash = ::Hash[keys.zip(counts)]
         hash[:to_s] = string
 
         return hash.to_struct

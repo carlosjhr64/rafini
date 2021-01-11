@@ -30,25 +30,6 @@ class TestArray < Test::Unit::TestCase
     end
   end
 
-  def test_per
-    assert_nothing_raised() do
-      a = ['a','b','c','d']
-      b = ['A','B','C','D']
-
-      h = {}
-      a.per(b){|l,m| h[l]=m}
-      assert_equal({'a'=>'A', 'b'=>'B', 'c'=>'C', 'd'=>'D'}, h)
-
-      h = {}
-      a.per{|l,i| h[l]=i}
-      assert_equal({'a'=>0, 'b'=>1, 'c'=>2, 'd'=>3}, h)
-
-      h = {}
-      a.per{|l,i| h[l]=b[i]}
-      assert_equal({'a'=>'A', 'b'=>'B', 'c'=>'C', 'd'=>'D'}, h)
-    end
-  end
-
   def test_is
     assert_nothing_raised() do
       h = {a: false, b: false, c: false}
