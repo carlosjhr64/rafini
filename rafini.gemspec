@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
 
   s.name     = 'rafini'
-  s.version  = '3.0.210110'
+  s.version  = '3.0.210111'
 
   s.homepage = 'https://github.com/carlosjhr64/rafini'
 
