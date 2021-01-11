@@ -3,8 +3,8 @@ module Rafini
     refine ::Hash do
       # struct = hash.to_struct
       # Why not?
-      def to_struct
-        Struct.new(*keys).new(*values)
+      def to_struct(&blk)
+        Struct.new(*keys, &blk).new(*values)
       end
 
       # hash0.supplement!(hash1,...) #=> hash

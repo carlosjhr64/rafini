@@ -7,7 +7,8 @@ autoload
 backtrace
 bang
 base
-billions
+billion
+blk
 block
 call
 camelize
@@ -18,6 +19,7 @@ counts
 d
 day
 decade
+description
 downto
 dup
 each
@@ -32,6 +34,7 @@ f
 factors
 fetch
 find
+first
 flatten
 floor
 freeze
@@ -43,7 +46,7 @@ hashes
 has_key
 header
 hour
-hundreds
+hundred
 i
 illion
 inject
@@ -55,6 +58,7 @@ join
 joins
 key
 keys
+kw
 last
 length
 level
@@ -64,7 +68,7 @@ m
 map
 message
 millennium
-millions
+million
 minute
 month
 n
@@ -73,11 +77,11 @@ nil
 odometer
 Odometers
 odoread
-ones
+one
 previous
 push
 puts
-quadrillions
+quadrillion
 Rafini
 raise
 RangeError
@@ -106,14 +110,14 @@ String
 STRING
 Struct
 supplement
-tens
-thousands
+ten
+thousand
 Thread
 thread_bang
 to_f
 to_s
 to_struct
-trillions
+trillion
 type
 unshift
 upcase

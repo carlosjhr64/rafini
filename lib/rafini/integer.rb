@@ -11,10 +11,8 @@ module Rafini
         raise RangeError, 'negative odometer' if self < 0
         readings, remainder = [], self
 
-        if factors
-          levels = levels.inject([1]){|m, f| m.push(m.last*f)}
-          levels.shift
-        end
+        levels = levels.inject([1]){|m, f| m.push(m.last*f)} if factors
+        levels.shift
 
         levels.reverse_each do |level|
           # in case of a float, floor
