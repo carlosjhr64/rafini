@@ -8,18 +8,15 @@ module Rafini
       #   ((60*60*24)*3 + (60*60)*12 + 60*15 + 30).odometer(60,60,24) #=> [30, 15, 12, 3]
       # Useful for making clocks, number scales, mayan long count... etc.
       def odometer(*p)
-        n = self
-        m = p.inject(1,:*)
-        r = []
+        raise RangeError, 'negative odometer' if self < 0
+        n, m, r  =  self, p.inject(1,:*), []
 
-        (p.length-1).downto(0) do |i|
-          y = n/m; r.unshift y
-          n = n%m
-          f = p[i]; m = m/f
+        p.reverse_each do |q|
+          r.unshift n/m
+          n, m  =  n%m, m/q
         end
-        r.unshift n
 
-        return r
+        r.unshift n # remainder
       end
     end
   end

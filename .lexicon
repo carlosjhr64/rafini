@@ -14,6 +14,7 @@ call
 camelize
 capitalize
 centurie
+count
 counts
 d
 day
@@ -29,7 +30,6 @@ eon
 epoch
 era
 Exception
-f
 fetch
 find
 flatten
@@ -63,7 +63,6 @@ message
 millennium
 millions
 minute
-mod
 month
 n
 new
@@ -76,13 +75,18 @@ p
 per
 previous
 puts
+q
 quadrillions
 r
 Rafini
+raise
+RangeError
 refine
 require
+reverse_each
 round
 Ruby30
+s
 scale
 SCALE
 sec2time
@@ -116,5 +120,5 @@ value
 values
 VERSION
 week
-y
 year
+zip

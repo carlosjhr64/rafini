@@ -3,8 +3,8 @@ module Rafini
   # Rafini dares to introduce empty sets.  But WHY!???
   # Ta-ta-TUM...
   module Empty
-    ARRAY = [].freeze
-    HASH  = {}.freeze
+    ARRAY  = [].freeze
+    HASH   = {}.freeze
     STRING = ''.freeze
   end
 end

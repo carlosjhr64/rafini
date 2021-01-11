@@ -47,27 +47,29 @@ module Rafini
       # Need Rafini::Integer for #odometer
       # Need Rafini::Hash for #to_struct
       # Need Rafini::Array for #per
-      [Rafini::Integer, Rafini::Hash, Rafini::Array].each{|mod| using mod}
+      [Rafini::Integer, Rafini::Hash, Rafini::Array].each{using _1}
 
       def odoread(scale)
-        values = scale.values
-        keys = scale.keys;
-        counts = self.odometer(*values[0..-2])
+        counts = odometer(*scale.values[0..-2])
+        hash = ::Hash[scale.keys.zip(counts)]
 
-        string = "#{counts[0]} #{keys[0]}#{(counts[0]==1)? '' : 's'}"
-        (keys.length-1).downto(1) do |i|
-          if counts[i] > 0
-            string = "#{counts[i]} #{keys[i]}#{(counts[i]>1)? 's' : ''}"
-            string << " and #{counts[i-1]} #{keys[i-1]}#{(counts[i-1]>1)? 's' : ''}" if counts[i-1]>0
-            break
+        string = ''
+        if self == 0
+          string << "0 #{scale.keys[0]}s"
+        else
+          hash.reverse_each do |key, count|
+            s = (count==1)? '' : 's'
+            unless string.empty?
+              string << " and #{count} #{key}#{s}" if count > 0
+              break
+            end
+            next if count == 0
+            string << "#{count} #{key}#{s}"
           end
         end
+        hash[:to_s] = string
 
-        hash = {}
-        keys.per(counts){|k,v| hash[k]=v}
-        hash[:to_s]=string
-
-        return hash.to_struct
+        hash.to_struct
       end
 
       # Integer#sec2time
