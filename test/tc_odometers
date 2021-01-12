@@ -1,8 +1,5 @@
 #! ruby
 require 'test/unit'
-require 'rafini/integer'
-require 'rafini/hash'
-require 'rafini/array'
 require 'rafini/odometers'
 
 class TestOdometers < Test::Unit::TestCase
@@ -16,7 +13,7 @@ class TestOdometers < Test::Unit::TestCase
       assert_equal '2 hours and 46 minutes', 10_000.sec2time.to_s
       assert_equal '1 day and 3 hours', 100_000.sec2time.to_s
       assert_equal '1 week and 4 days', 1_000_000.sec2time.to_s
-      assert_equal '4 months', 10_000_000.sec2time.to_s
+      assert_equal '3 months and 3 weeks', 10_000_000.sec2time.to_s
       assert_equal '3 years and 2 months', 100_000_000.sec2time.to_s
       assert_equal '3 decades and 1 year', 1_000_000_000.sec2time.to_s
       assert_equal '3 centuries and 1 decade', 10_000_000_000.sec2time.to_s
@@ -38,7 +35,7 @@ class TestOdometers < Test::Unit::TestCase
       assert_equal 2, 10_000.sec2time.hour
       assert_equal 1, 100_000.sec2time.day
       assert_equal 1, 1_000_000.sec2time.week
-      assert_equal 4, 10_000_000.sec2time.month
+      assert_equal 3, 10_000_000.sec2time.month
       assert_equal 3, 100_000_000.sec2time.year
       assert_equal 3, 1_000_000_000.sec2time.decade
       assert_equal 3, 10_000_000_000.sec2time.centurie
@@ -55,21 +52,21 @@ class TestOdometers < Test::Unit::TestCase
   def test_illion_to_s
     assert_nothing_raised() do
       assert_equal '123', 123.illion.to_s
-      assert_equal '1.23k', 1_234.illion.to_s
-      assert_equal '12.3k', 12_344.illion.to_s
-      assert_equal '123k', 123_456.illion.to_s
+      assert_equal '1.23K', 1_234.illion.to_s
+      assert_equal '12.3K', 12_344.illion.to_s
+      assert_equal '123K', 123_456.illion.to_s
       assert_equal '1.23M', 1_234_567.illion.to_s
       assert_equal '12.3M', 12_345_678.illion.to_s
       assert_equal '123M', 123_456_789.illion.to_s
 
       assert_equal '1.23B', 1_234_567_890.illion(:short).to_s
-      assert_equal '1.23kM', 1_234_567_890.illion(:long).to_s
+      assert_equal '1.23KM', 1_234_567_890.illion(:long).to_s
 
       assert_equal '12.3B', 12_345_678_900.illion(:short).to_s
-      assert_equal '12.3kM', 12_345_678_900.illion(:long).to_s
+      assert_equal '12.3KM', 12_345_678_900.illion(:long).to_s
 
       assert_equal '123B', 123_456_789_000.illion(:short).to_s
-      assert_equal '123kM', 123_456_789_000.illion(:long).to_s
+      assert_equal '123KM', 123_456_789_000.illion(:long).to_s
 
       assert_equal '1.23T', 1_234_567_890_000.illion(:short).to_s
       assert_equal '1.23B', 1_234_567_890_000.illion(:long).to_s
@@ -81,15 +78,15 @@ class TestOdometers < Test::Unit::TestCase
       assert_equal '123B', 123456789000000.illion(:long).to_s
 
       assert_equal '1.23Q',  1234567890000000.illion.to_s # short default
-      assert_equal '1.23kB', 1234567890000000.illion(:long).to_s
+      assert_equal '1.23KB', 1234567890000000.illion(:long).to_s
 
       assert_equal '12.3Q',  12345678900000000.illion.to_s
-      assert_equal '12.3kB', 12345678900000000.illion(:long).to_s
+      assert_equal '12.3KB', 12345678900000000.illion(:long).to_s
 
       assert_equal '123Q',  123456789000000000.illion.to_s
-      assert_equal '123kB', 123456789000000000.illion(:long).to_s
+      assert_equal '123KB', 123456789000000000.illion(:long).to_s
 
-      assert_equal '1.23kQ',  1234567890000000000.illion.to_s
+      assert_equal '1.23KQ',  1234567890000000000.illion.to_s
       # short version works, but
       # use does not make sense for numbers bigger that Quadrillion
       # as coded.  Needs Quintillion, and so on...
@@ -101,12 +98,12 @@ class TestOdometers < Test::Unit::TestCase
       assert_equal '1.23T', 1234567890000000000.illion(:long).to_s
       assert_equal '12.3T',  12345678900000000000.illion(:long).to_s
       assert_equal '123T',   123456789000000000000.illion(:long).to_s
-      assert_equal '1.23kT', 1234567890000000000000.illion(:long).to_s
-      assert_equal '12.3kT', 12345678900000000000000.illion(:long).to_s
-      assert_equal '123kT',  123456789000000000000000.illion(:long).to_s
+      assert_equal '1.23KT', 1234567890000000000000.illion(:long).to_s
+      assert_equal '12.3KT', 12345678900000000000000.illion(:long).to_s
+      assert_equal '123KT',  123456789000000000000000.illion(:long).to_s
       assert_equal '1.23Q',  1234567890000000000000000.illion(:long).to_s
-      assert_equal '1.23kQ', 1234567890000000000000000000.illion(:long).to_s
-      assert_equal '123kQ',  123456789000000000000000000000.illion(:long).to_s
+      assert_equal '1.23KQ', 1234567890000000000000000000.illion(:long).to_s
+      assert_equal '123KQ',  123456789000000000000000000000.illion(:long).to_s
       assert_equal '1.23MQ', 1234567890000000000000000000000.illion(:long).to_s
       # long version works, but
       # use does not make sense for numbers bigger that kQuadrillions
@@ -124,15 +121,15 @@ class TestOdometers < Test::Unit::TestCase
   def test_illion_struct
     assert_nothing_raised() do
       m = 888_777_666_555_444_321.illion
-      assert_equal m.ones, 1
-      assert_equal m.tens, 2
-      assert_equal m.hundreds, 3
-      assert_equal m.thousands, 444
-      assert_equal m.millions, 555
-      assert_equal m.billions, 666
-      assert_equal m.trillions, 777
-      assert_equal m.quadrillions, 888
-      assert_equal m.to_s, "889Q"
+      assert_equal m.one, 1
+      assert_equal m.ten, 2
+      assert_equal m.hundred, 3
+      assert_equal m.thousand, 444
+      assert_equal m.million, 555
+      assert_equal m.billion, 666
+      assert_equal m.trillion, 777
+      assert_equal m.quadrillion, 888
+      assert_equal "889Q", m.to_s
     end
   end
 end
