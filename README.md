@@ -1,8 +1,14 @@
-# rafini 3.0.210112
+# Rafini 3.0.210112
 
 ## DESCRIPTION:
 
 Just a collection of useful refinements.
+
+## INSTALL:
+
+```shell
+$ gem install rafini
+```
 
 ## SYNOPSIS:
 
@@ -13,12 +19,23 @@ require 'rafini/array'
 using Rafini::Array
 
 # joins
-['a','b','c','d','e','f'].joins('-','-',' '){':'}
-#=> "a-b-c d:e:f"
+['Y','M','D','h','m','s'].joins('-','-',' '){':'}
+#=> "Y-M-D h:m:s"
+[1,9,2,8,3,7,4,6,5,5].joins{|a,b|a>b ? '>': a<b ? '<': '='}
+#=> "1<9>2<8>3<7>4<6>5=5"
 
 # is
-[:a,:b,:c].is(true)
-#=> {:a=>true, :b=>true, :c=>true}
+[:a,:b,:c].is(true) #=> {:a=>true, :b=>true, :c=>true}
+```
+### Rafini::Empty
+
+```ruby
+require 'rafini/empty'
+include Rafini::Empty
+s0 #=> ""
+a0 #=> []
+h0 #=> {}
+[s0,a0,h0].all?(&:frozen?) #=> true
 ```
 
 ### using Rafini::Exception
@@ -47,10 +64,13 @@ error.class #=> RuntimeError
 error.to_s  #=> "Ugly Message"
 
 # Rafini.thread_bang!
-Rafini.thread_bang!('Nice Message') do
+thread = Rafini.thread_bang!('Nice Message') do
   # this is in a thread
-  raise 'Ugly Message'
+  raise 'Ugly Message' # outputs as $!.puts 'Nice Message'
 end
+# The returned value joined from the thread
+# will not re-raise the error(but gives the error).
+thread.value.class #=> RuntimeError
 ```
 
 ### using Rafini::Hash
@@ -60,9 +80,10 @@ require 'rafini/hash'
 using Rafini::Hash
 
 # to_struc
-struct = {a:'A',b:'C',c:'C'}.to_struct
-struct   #=> #<struct a="A", b="C", c="C">
-struct.a #=> "A"
+struct = {a:'A',b:'C',c:'C'}.to_struct{ def ok = "OK" }
+struct    #=> #<struct a="A", b="C", c="C">
+struct.a  #=> "A"
+struct.ok #=> "OK"
 
 # supplement
 {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"B", :c=>"C", :d=>"D"}
@@ -106,22 +127,6 @@ using Rafini::String
 
 # semantic
 '1.2.3'.semantic(0..1) #=> "1.2"
-```
-
-### Rafini::Empty
-
-```ruby
-require 'rafini/empty'
-Rafini::Empty::STRING       #=> ""
-Rafini::Empty::ARRAY        #=> []
-Rafini::Empty::HASH         #=> {}
-Rafini::Empty::HASH.frozen? #=> true
-```
-
-## INSTALL:
-
-```shell
-$ gem install rafini
 ```
 
 ## LICENSE:
