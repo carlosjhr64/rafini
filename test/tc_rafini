@@ -6,6 +6,9 @@ class TestRafini < Test::Unit::TestCase
     assert_nothing_raised() do
       require 'rafini'
 
+      # Some trivial tests
+      assert_equal '3.0.210112', Rafini::VERSION
+
       assert_equal Module, Rafini::Array.class
       assert_equal Module, Rafini::Exception.class
       assert_equal Module, Rafini::Hash.class
@@ -13,12 +16,6 @@ class TestRafini < Test::Unit::TestCase
       assert_equal Module, Rafini::String.class
       assert_equal Module, Rafini::Odometers.class
       assert_equal Module, Rafini::Empty.class
-
-      # Some trivial tests
-      assert_equal '3.0.210112', Rafini::VERSION
-      assert a=Rafini::Empty::ARRAY  and a.empty? and a.frozen?
-      assert a=Rafini::Empty::HASH   and a.empty? and a.frozen?
-      assert a=Rafini::Empty::STRING and a.empty? and a.frozen?
     end
   end
 end

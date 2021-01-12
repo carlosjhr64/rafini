@@ -1,0 +1,31 @@
+#! ruby
+require 'test/unit'
+require 'rafini'
+
+class TestEmpty < Test::Unit::TestCase
+  include Rafini::Empty
+
+  def test_empty
+    assert_equal Rafini::Empty::STRING, s0
+    assert_equal Rafini::Empty::ARRAY,  a0
+    assert_equal Rafini::Empty::HASH,   h0
+
+    assert_equal Rafini::Empty::STRING.object_id, s0.object_id
+    assert_equal Rafini::Empty::ARRAY.object_id,  a0.object_id
+    assert_equal Rafini::Empty::HASH.object_id,   h0.object_id
+
+    s,a,h = '',[],{}
+    # save value
+    assert_equal s, s0
+    assert_equal a, a0
+    assert_equal h, h0
+    # different objects
+    refute_equal s.object_id, s0.object_id
+    refute_equal a.object_id, a0.object_id
+    refute_equal h.object_id, h0.object_id
+    # s0,a0,h0 are frozen
+    assert_raises(FrozenError){ s0    << 'O' }
+    assert_raises(FrozenError){ a0[0]  = 'O' }
+    assert_raises(FrozenError){ h0[:h] = 'O' }
+  end
+end

@@ -1,4 +1,5 @@
 _1
+a0
 age
 amend
 Array
@@ -37,6 +38,7 @@ flatten
 floor
 freeze
 gigaannum
+h0
 hash
 Hash
 HASH
@@ -97,6 +99,7 @@ reverse_each
 round
 Ruby30
 s
+s0
 scale
 SCALE
 sec2time
