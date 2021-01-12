@@ -106,7 +106,7 @@ class TestOdometers < Test::Unit::TestCase
       assert_equal '123KQ',  123456789000000000000000000000.illion(:long).to_s
       assert_equal '1.23MQ', 1234567890000000000000000000000.illion(:long).to_s
       # long version works, but
-      # use does not make sense for numbers bigger that kQuadrillions
+      # use does not make sense for numbers bigger than KQ, Thousand-Quadrillions
       # as coded.  Needs Quintillion, and so on...
       # Unless one likes MQ, and so on, it recurses nicely as show below:
       qs =             1_000_000_000_000_000

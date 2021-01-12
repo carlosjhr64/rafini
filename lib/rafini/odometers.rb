@@ -3,7 +3,8 @@ require 'rafini/hash'
 
 module Rafini
   module Odometers
-    year = 365*24*60*60 + 6*60*60 + 9*60 + 9
+    # Sidereal Year: https://en.wikipedia.org/wiki/Year
+    year = 365*24*60*60 + 6*60*60 + 9*60 + 9.76
     SEC2TIME = { # levels
       second:     1,
       minute:     60,
