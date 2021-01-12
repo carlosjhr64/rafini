@@ -1,4 +1,8 @@
-# Rafini 3.0.210112
+# Rafini
+
+* [VERSION 3.0.210112](https://github.com/carlosjhr64/rafini/releases)
+* [github](https://github.com/carlosjhr64/rafini)
+* [rubygems](https://rubygems.org/gems/rafini)
 
 ## DESCRIPTION:
 
