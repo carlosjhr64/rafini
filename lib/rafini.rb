@@ -1,5 +1,5 @@
 module Rafini
-  VERSION = '3.0.210111'
+  VERSION = '3.0.210112'
   autoload :Array,     'rafini/array'
   autoload :Exception, 'rafini/exception'
   autoload :Hash,      'rafini/hash'
