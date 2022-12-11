@@ -1,6 +1,6 @@
 # Rafini
 
-* [VERSION 3.0.210112](https://github.com/carlosjhr64/rafini/releases)
+* [VERSION 3.0.221211](https://github.com/carlosjhr64/rafini/releases)
 * [github](https://github.com/carlosjhr64/rafini)
 * [rubygems](https://rubygems.org/gems/rafini)
 
@@ -137,7 +137,7 @@ using Rafini::String
 
 (The MIT License)
 
-Copyright (c) 2021 carlosjhr64
+Copyright (c) 2022 CarlosJHR64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
