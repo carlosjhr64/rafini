@@ -1,6 +1,24 @@
 module Rafini
   module Array
     refine ::Array do
+      # classify:
+      # Like Set#classify
+      def classify(hash: Hash.new{|h,k|h[k]=[]}, &block)
+        block ||= lambda{|v|v.class}
+        self.each{|v| hash[block[v]] << v}
+        return hash
+      end
+
+      # is:
+      # [:a,:b,:c].is(true) #=> {:a=>true,:b=>true,:c=>true}
+      #
+      # Updates a hash with the keys given by the array to the given value.
+      def is(value, hash={})
+        each{|key| hash[key]=value}
+        return hash
+      end
+
+      # joins:
       # type _AToS = ::Array[(_AToS|_ToS)]
       # _AToS#joins(*_AToS seps)?{(_ToS,_ToS)->_ToS}
       #
@@ -28,14 +46,6 @@ module Rafini
           previous = item
         end
         return string
-      end
-
-      # [:a,:b,:c].is(true) #=> {:a=>true,:b=>true,:c=>true}
-      #
-      # Updates a hash with the keys given by the array to the given value.
-      def is(value, hash={})
-        each{|key| hash[key]=value}
-        return hash
       end
     end
   end

@@ -16,6 +16,13 @@ module Rafini
       def semantic(v=(0..2), split:'.', join:'.')
         [*self.split(split)[v]].join(join)
       end
+
+      # shellescape:
+      # Same funtionality as Shellword's String#shellescape
+      def shellescape
+        # This is a contraction of Shellwords.escape function
+        self.gsub(/[^\w\-.,:+\/@\n]/,'\\\\\\&').gsub(/\n/,"'\n'")
+      end
     end
   end
 end
