@@ -8,7 +8,7 @@ unless $VERBOSE==false and $DEBUG==false
   warn "Warning: $VERBOSE and $DEBUG where set to false"
 end
 
-class TestRafini < Test::Unit::TestCase
+class TestException < Test::Unit::TestCase
   using Rafini::Exception
 
   def self.capture_stderr
@@ -28,7 +28,7 @@ class TestRafini < Test::Unit::TestCase
         raise 'BANG!'
       rescue Exception
         # Nice Bang! given
-        out = TestRafini.capture_stderr{ $!.puts('Bang!') }
+        out = TestException.capture_stderr{ $!.puts('Bang!') }
       end
       assert_not_nil(out)
       out.strip!
@@ -41,7 +41,7 @@ class TestRafini < Test::Unit::TestCase
         raise 'BANG!'
       rescue Exception
         # No nice message given, gives ugly BANG!
-        out = TestRafini.capture_stderr{ $!.puts }
+        out = TestException.capture_stderr{ $!.puts }
       end
       assert_not_nil(out)
       out.strip!
@@ -55,7 +55,7 @@ class TestRafini < Test::Unit::TestCase
         $VERBOSE = nil
         raise 'BANG!'
       rescue Exception
-        out = TestRafini.capture_stderr{ $!.puts }
+        out = TestException.capture_stderr{ $!.puts }
       ensure
         $VERBOSE = false
       end
@@ -71,7 +71,7 @@ class TestRafini < Test::Unit::TestCase
         $VERBOSE = true
         raise 'BANG!'
       rescue Exception
-        out = TestRafini.capture_stderr{ $!.puts('Bang!') }
+        out = TestException.capture_stderr{ $!.puts('Bang!') }
       ensure
         $VERBOSE = false
       end
@@ -87,7 +87,7 @@ class TestRafini < Test::Unit::TestCase
         $DEBUG = true
         raise 'BANG!'
       rescue Exception
-        out = TestRafini.capture_stderr{ $!.puts }
+        out = TestException.capture_stderr{ $!.puts }
       ensure
         $DEBUG = false
       end
@@ -103,7 +103,7 @@ class TestRafini < Test::Unit::TestCase
 
     assert_nothing_raised() do
       out=error=nil
-      out = TestRafini.capture_stderr do
+      out = TestException.capture_stderr do
         error = Rafini.bang!('Bang!'){ raise 'BANG!'}
       end
       assert_not_nil(out)
@@ -115,7 +115,7 @@ class TestRafini < Test::Unit::TestCase
 
     assert_nothing_raised() do
       out=error=nil
-      out = TestRafini.capture_stderr do
+      out = TestException.capture_stderr do
         error = Rafini.bang!{ raise 'BANG!'}
       end
       assert_not_nil(out)
@@ -127,7 +127,7 @@ class TestRafini < Test::Unit::TestCase
 
     assert_nothing_raised() do
       out=value=nil
-      out = TestRafini.capture_stderr do
+      out = TestException.capture_stderr do
         value = Rafini.bang!{ $stderr.puts 'No Error.'}
       end
       assert_not_nil(out)
