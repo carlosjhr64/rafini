@@ -31,7 +31,6 @@ using Rafini::Array
 
 # classify(like Set#classify)
 [1, 2.0, 'Three', 4.0].classify #=> {Integer=>[1], Float=>[2.0, 4.0], String=>["Three"]}
-#
 
 # is
 [:a,:b,:c].is(true) #=> {:a=>true, :b=>true, :c=>true}
@@ -75,6 +74,9 @@ using Rafini::String
 
 # semantic
 '1.2.3'.semantic(0..1) #=> "1.2"
+
+# shellescape(like Shellwords.escape)
+'Hello World!'.shellescape #=> "Hello\\ World\\!"
 ```
 ### using Rafini::Exception
 ```ruby
