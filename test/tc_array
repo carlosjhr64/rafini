@@ -4,6 +4,17 @@ require 'rafini/array'
 
 class TestArray < Test::Unit::TestCase
   using Rafini::Array
+  def test_array_classify
+    a = [1, 2.0, :three, 'Four', /Five/, /Six/, :seven, 8]
+    h = {Integer => [1,8], Float => [2.0], Symbol => [:three,:seven], String => ['Four'], Regexp => [/Five/,/Six/]}
+    assert_equal h, a.classify
+  end
+
+  def test_array_classify_block
+    a = [1, 2.0, :three, 'Four', /Five/, /Six/, :seven, 8]
+    h = {Numeric: [1,2.0,8], NotNumeric: [:three,'Four',/Five/,/Six/,:seven]}
+    assert_equal h, a.classify{|v|(v.is_a? Numeric)? :Numeric : :NotNumeric}
+  end
 
   def test_joins
     assert_nothing_raised() do

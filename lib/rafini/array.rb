@@ -25,7 +25,8 @@ module Rafini
       # Returns a string created by joining the elements of the (flatten) array,
       # separated by the given (flatten) separators.
       # If no separators are given or are used up,
-      # it uses the value of the executed block, which is passed the next neigboring iteration items.
+      # it uses the value of the executed block,
+      # which is passed the next neigboring iteration items.
       # Else, it just joins the items.
       #    ['2021','Jan','09','07','29','05'].joins('-', '-', ' '){':'}
       #    #=> "2021-Jan-09 07:29:05"
@@ -41,7 +42,9 @@ module Rafini
         return string if items.empty?
         seps.flatten!
         while item = items.shift
-          sep = seps.shift&.to_s || block&.call(previous,item).to_s and string << sep
+          if sep = seps.shift&.to_s || block&.call(previous,item)&.to_s
+            string << sep
+          end
           string << item.to_s
           previous = item
         end
