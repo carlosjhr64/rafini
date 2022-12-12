@@ -9,17 +9,24 @@
 Just a collection of useful refinements.
 
 ## INSTALL:
-
 ```shell
 $ gem install rafini
 ```
-
 ## SYNOPSIS:
-
-### using Rafini::Array
-
 ```ruby
-require 'rafini/array'
+require 'rafini'
+```
+### include Rafini::Empty
+```ruby
+include Rafini::Empty
+
+s0 #=> ""
+a0 #=> []
+h0 #=> {}
+[s0,a0,h0].all?(&:frozen?) #=> true
+```
+### using Rafini::Array
+```ruby
 using Rafini::Array
 
 # joins
@@ -31,21 +38,42 @@ using Rafini::Array
 # is
 [:a,:b,:c].is(true) #=> {:a=>true, :b=>true, :c=>true}
 ```
-### Rafini::Empty
-
+### using Rafini::Hash
 ```ruby
-require 'rafini/empty'
-include Rafini::Empty
-s0 #=> ""
-a0 #=> []
-h0 #=> {}
-[s0,a0,h0].all?(&:frozen?) #=> true
+using Rafini::Hash
+
+# to_struc
+struct = {a:'A',b:'C',c:'C'}.to_struct{ def ok = "OK" }
+struct    #=> #<struct a="A", b="C", c="C">
+struct.a  #=> "A"
+struct.ok #=> "OK"
+
+# supplement
+{a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"B", :c=>"C", :d=>"D"}
+
+# amend
+{a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"X"}
 ```
-
-### using Rafini::Exception
-
+### using Rafini::Integer
 ```ruby
-require 'rafini/exception'
+using Rafini::Integer
+
+# odometer
+123.odometer(10,10) #=> [3, 2, 1]
+30.odometer(2,3,5)  #=> [0, 0, 0, 1]
+```
+### using Rafini::String
+```ruby
+using Rafini::String
+
+# camelize
+'a_camel_kick'.camelize #=> "ACamelKick"
+
+# semantic
+'1.2.3'.semantic(0..1) #=> "1.2"
+```
+### using Rafini::Exception
+```ruby
 using Rafini::Exception
 
 # $!.puts
@@ -76,41 +104,8 @@ end
 # will not re-raise the error(but gives the error).
 thread.value.class #=> RuntimeError
 ```
-
-### using Rafini::Hash
-
-```ruby
-require 'rafini/hash'
-using Rafini::Hash
-
-# to_struc
-struct = {a:'A',b:'C',c:'C'}.to_struct{ def ok = "OK" }
-struct    #=> #<struct a="A", b="C", c="C">
-struct.a  #=> "A"
-struct.ok #=> "OK"
-
-# supplement
-{a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"B", :c=>"C", :d=>"D"}
-
-# amend
-{a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {:a=>"A", :b=>"X"}
-```
-
-### using Rafini::Integer
-
-```ruby
-require 'rafini/integer'
-using Rafini::Integer
-
-# odometer
-123.odometer(10,10) #=> [3, 2, 1]
-30.odometer(2,3,5)  #=> [0, 0, 0, 1]
-```
-
 ### using Rafini::Odometers
-
 ```ruby
-require 'rafini/odometers'
 using Rafini::Odometers
 
 # sec2time
@@ -119,20 +114,15 @@ using Rafini::Odometers
 # illion
 3_512_325.illion.to_s #=> "3.51M"
 ```
-
-### using Rafini::String
-
+### using Rafini::Requires
 ```ruby
-require 'rafini/string'
-using Rafini::String
+using Rafini::Requires
 
-# camelize
-'a_camel_kick'.camelize #=> "ACamelKick"
-
-# semantic
-'1.2.3'.semantic(0..1) #=> "1.2"
+requires'
+ruby   ~>3.0
+rafini ~>3.1
+json   ~>2.0' #=> ["json"]
 ```
-
 ## LICENSE:
 
 (The MIT License)
