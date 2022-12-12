@@ -28,4 +28,9 @@ class TestString < Test::Unit::TestCase
       assert_equal '3.4', '1/2/3/4/5'.semantic(2..3, split:'/', join:'.')
     end
   end
+
+  def test_shellescape
+    s = "I know!\nAnd you?".shellescape
+    assert_equal "I\\ know\\!'\n'And\\ you\\?", s
+  end
 end
