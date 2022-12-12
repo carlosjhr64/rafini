@@ -29,7 +29,7 @@ using Rafini::Exception
 #   value = Rafini.bang!('Ooops! Not perfect?') do
 #     # Perfect code here...
 #   end
-def Rafini.bang!(message=nil, bang=Exception, &block)
+def Rafini.bang!(message=nil, bang=::Exception, &block)
   value = nil
   begin
     value = block.call
@@ -52,6 +52,6 @@ end
 #  end
 # With the following below, I'll be able to say
 # Rafini.thread_bang!('blah blah...'){ ...stuff... }
-def Rafini.thread_bang!(header=nil, bang=Exception, &block)
+def Rafini.thread_bang!(header=nil, bang=::Exception, &block)
   Thread.new{Rafini.bang!(header, bang, &block)}
 end

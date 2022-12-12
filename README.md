@@ -29,14 +29,18 @@ h0 #=> {}
 ```ruby
 using Rafini::Array
 
+# classify(like Set#classify)
+[1, 2.0, 'Three', 4.0].classify #=> {Integer=>[1], Float=>[2.0, 4.0], String=>["Three"]}
+#
+
+# is
+[:a,:b,:c].is(true) #=> {:a=>true, :b=>true, :c=>true}
+
 # joins
 ['Y','M','D','h','m','s'].joins('-','-',' '){':'}
 #=> "Y-M-D h:m:s"
 [1,9,2,8,3,7,4,6,5,5].joins{|a,b|a>b ? '>': a<b ? '<': '='}
 #=> "1<9>2<8>3<7>4<6>5=5"
-
-# is
-[:a,:b,:c].is(true) #=> {:a=>true, :b=>true, :c=>true}
 ```
 ### using Rafini::Hash
 ```ruby

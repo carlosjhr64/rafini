@@ -3,7 +3,7 @@ module Rafini
     refine ::Array do
       # classify:
       # Like Set#classify
-      def classify(hash: Hash.new{|h,k|h[k]=[]}, &block)
+      def classify(hash: ::Hash.new{|h,k|h[k]=[]}, &block)
         block ||= lambda{|v|v.class}
         self.each{|v| hash[block[v]] << v}
         return hash
