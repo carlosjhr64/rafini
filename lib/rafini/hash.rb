@@ -11,7 +11,8 @@ module Rafini
       #
       # Supplements hash with hashes.
       # Adds missing elements only.
-      #   {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'B',c:'C',d:'D'}
+      #   {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'})
+      #   #=> {a:'A',b:'B',c:'C',d:'D'}
       def supplement!(*hashes)
         hashes.each do |hash|
           hash.each do |key, value|
@@ -27,7 +28,8 @@ module Rafini
       # hash0.amend(hash1,...)
       #
       # Ammends hash with hashes.
-      # Overwrites existing keys only with first key value found in amending hashes.
+      # Overwrites existing keys
+      # only with first key value found in amending hashes.
       #   {a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'}) #=> {a:'A',b:'X'}
       def amend!(*hashes)
         self.each_key do |key|
