@@ -6,16 +6,17 @@ class TestRafini < Test::Unit::TestCase
     assert_nothing_raised() do
       require 'rafini'
 
-      # Some trivial tests
-      assert_equal '3.0.210112', Rafini::VERSION
+      assert_equal Module, Rafini::Empty.class
 
       assert_equal Module, Rafini::Array.class
-      assert_equal Module, Rafini::Exception.class
       assert_equal Module, Rafini::Hash.class
       assert_equal Module, Rafini::Integer.class
       assert_equal Module, Rafini::String.class
+
+      assert_equal Module, Rafini::Exception.class
+
       assert_equal Module, Rafini::Odometers.class
-      assert_equal Module, Rafini::Empty.class
+      assert_equal Module, Rafini::Requires.class
     end
   end
 end
