@@ -1,6 +1,6 @@
 # Rafini
 
-* [VERSION 3.1.221212](https://github.com/carlosjhr64/rafini/releases)
+* [VERSION 3.2.221213](https://github.com/carlosjhr64/rafini/releases)
 * [github](https://github.com/carlosjhr64/rafini)
 * [rubygems](https://rubygems.org/gems/rafini)
 
@@ -13,6 +13,8 @@ Just a collection of useful refinements.
 $ gem install rafini
 ```
 ## SYNOPSIS:
+
+Note that `Rafini` auto-loads assets as requested.
 ```ruby
 require 'rafini'
 ```
@@ -126,8 +128,13 @@ using Rafini::Requires
 
 requires'
 ruby   ~>3.0
-rafini ~>3.1
+rafini ~>3.2
 json   ~>2.0' #=> ["json"]
+## You can also say:
+#   require 'rafini/requires'
+#   Rafini.requires...
+## But you wont be able to test for Rafini's VERSION
+## unless you've also required 'rafini'.
 ```
 ## LICENSE:
 

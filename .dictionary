@@ -58,4 +58,5 @@ struc
 struct
 unshift
 upcase
+ve
 wikipedia

@@ -39,4 +39,7 @@ module Rafini
       end
     end
   end
+
+  using Requires
+  def Rafini.requires(*list) = Kernel.requires(*list)
 end
