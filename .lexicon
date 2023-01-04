@@ -115,7 +115,7 @@ requires
 Requires
 reverse_each
 round
-Ruby31
+Ruby32
 RUBY_VERSION
 s
 s0

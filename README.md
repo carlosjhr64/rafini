@@ -140,7 +140,7 @@ json   ~>2.0' #=> ["json"]
 
 (The MIT License)
 
-Copyright (c) 2022 CarlosJHR64
+Copyright (c) 2023 CarlosJHR64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
