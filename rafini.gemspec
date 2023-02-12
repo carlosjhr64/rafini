@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     lib/rafini/exception.rb
     lib/rafini/hash.rb
     lib/rafini/integer.rb
+    lib/rafini/object.rb
     lib/rafini/odometers.rb
     lib/rafini/requires.rb
     lib/rafini/string.rb
