@@ -6,8 +6,7 @@ class TestInteger < Test::Unit::TestCase
   using Rafini::Integer
 
   def test_odometer
-    assert_nothing_raised() do
-
+    assert_nothing_raised do
       a = 365.odometer(73,5,4,32,11,227)
       assert_equal('0.0.1.0.0.0.0', a.join('.'))
 
@@ -27,7 +26,7 @@ class TestInteger < Test::Unit::TestCase
       a = (n*123).odometer(73,5,4,32,11,227)
       assert_equal('0.0.0.0.0.0.123', a.join('.'))
 
-      a = (373).odometer(1,7,365, factors:false)
+      a = 373.odometer(1,7,365, factors:false)
       assert_equal('1.1.1', a.join('.'))
 
       assert_raises(RangeError){ -1.odometer(2,3,5) }
