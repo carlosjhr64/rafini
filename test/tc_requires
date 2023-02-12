@@ -16,7 +16,7 @@ class TestRequires < Test::Unit::TestCase
   end
 
   def test_requires
-    # Note: README tests `requires` as a refinement.
+    # NOTE: README tests `requires` as a refinement.
     loaded = Rafini.requires'
     rafini ~>3.1
     ruby ~>3.0
