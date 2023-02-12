@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require 'test/unit'
+require 'rafini'
+
+class TestObject < Test::Unit::TestCase
+  using Rafini::Object
+  def test_object
+    assert_nil([].as{_1.empty? ? nil : _1.first})
+    assert_equal(1, [1,2,3].as{_1.empty? ? nil : _1.first})
+  end
+end

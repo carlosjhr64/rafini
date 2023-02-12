@@ -6,6 +6,7 @@ module Rafini
   autoload :Array,     'rafini/array'
   autoload :Hash,      'rafini/hash'
   autoload :Integer,   'rafini/integer'
+  autoload :Object,    'rafini/object'
   autoload :String,    'rafini/string'
   # Hybrid
   autoload :Exception, 'rafini/exception'
