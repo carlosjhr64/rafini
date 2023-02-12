@@ -9,7 +9,7 @@ module Rafini
       #   #=> [30, 15, 12, 3]
       # Useful for making clocks, number scales, mayan long count... etc.
       def odometer(*levels, factors: true)
-        raise RangeError, 'negative odometer' if self < 0
+        raise RangeError, 'negative odometer' if negative?
         readings, remainder = [], self
 
         levels = levels.inject([1]){|m, f| m.push(m.last*f)} if factors
