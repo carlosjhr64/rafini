@@ -10,6 +10,8 @@ Layout/EmptyLineBetweenDefs:
   Enabled: false
 Layout/EmptyLinesAroundAccessModifier:
   Enabled: false
+Layout/HashAlignment:
+  Enabled: false
 Layout/IndentationWidth:
   Enabled: false
 Layout/LeadingCommentSpace:
@@ -46,6 +48,8 @@ Lint/FloatComparison:
   Enabled: false
 Lint/MixedRegexpCaptureTypes:
   Enabled: false
+Lint/NestedMethodDefinition:
+  Enabled: false
 Lint/InheritException:
   Enabled: false
 Lint/ShadowingOuterLocalVariable:
@@ -81,6 +85,8 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/GuardClause:
+  Enabled: false
+Style/HashSyntax:
   Enabled: false
 Style/IfUnlessModifier:
   Enabled: false

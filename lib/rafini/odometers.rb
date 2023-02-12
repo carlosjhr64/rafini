@@ -47,15 +47,15 @@ module Rafini
       def description
         string = ''
         reverse_each do |key, count|
-          s = (count==1)? '' : 's'
+          s = count==1 ? '' : 's'
           unless string.empty?
-            string << " and #{count} #{key}#{s}" if count > 0
+            string << " and #{count} #{key}#{s}" if count.positive?
             break
           end
-          next if count == 0
+          next if count.zero?
           string << "#{count} #{key}#{s}"
         end
-        return string
+        string
       end
     end
 
@@ -63,9 +63,9 @@ module Rafini
       using Rafini::Integer # Need Rafini::Integer for #odometer
       using Rafini::Hash    # Need Rafini::Hash for #to_struct
 
-      def odoread(scale, **kw, &blk)
+      def odoread(scale, **kw, &)
         counts = odometer(*scale.values, **kw)
-        ::Hash[scale.keys.zip(counts)].to_struct(&blk)
+        scale.keys.zip(counts).to_h.to_struct(&)
       end
 
       # Integer#sec2time
@@ -73,23 +73,24 @@ module Rafini
       #   10_000.sec2time.to_s #=> "2 hours and 46 minutes"
       #   10_000.sec2time.hour #=> 2
       def sec2time
+        # Struct.new(*scale.keys).new(*counts){ method definitions }
         odoread(SEC2TIME, factors:false) do
           def to_s
             string = nil
             SEC2TIME.keys.reverse_each do |key|
               count=self[key]
               if string
-                if count > 0
+                if count.positive?
                   string << " and #{count} #{key}"
                   string << 's' if count > 1
                 end
                 break
               end
-              next if count==0
+              next if count.zero?
               string = "#{count} #{key}"
               string << 's' if count > 1
             end
-            string = "0 #{SEC2TIME.first[0]}s" unless string
+            string ||= "0 #{SEC2TIME.first[0]}s"
             string
           end
           def to_i
@@ -126,16 +127,16 @@ module Rafini
             number = to_i
             return number.to_s if number < 1_000
             if number < 1_000_000
-              precision = (number<10_000)? 2 : (number<100_000)? 1 : 0
+              precision = number<10_000 ? 2 : number<100_000 ? 1 : 0
               return "#{(number/1000.0).round(precision)}K"
             end
             keys = @scale.keys.reverse_each
             loop do
               key = keys.next
               n = self[key]
-              next if n == 0
+              next if n.zero?
               if n < 1_000
-                precision = (n<10)? 2 : (n<100)? 1 : 0
+                precision = n<10 ? 2 : n<100 ? 1 : 0
                 scale = @scale[key].to_f
                 f = (number/scale).round(precision)
                 return "#{f}#{key[0].upcase}"
@@ -149,7 +150,7 @@ module Rafini
         end
         struct.type  = type
         struct.scale = scale
-        return struct
+        struct
       end
     end
   end
