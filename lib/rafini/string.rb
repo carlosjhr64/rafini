@@ -26,6 +26,7 @@ module Rafini
       # 1) A camel kick, as in "I gotz camelized".
       # 2) "a_camel_kick" => "ACamelKick"
       def camelize(sep='_')
+        warn "DEPRECATED: use #pascal_case instead"
         split(sep).map(&:capitalize).join
       end
 
