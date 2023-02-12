@@ -20,6 +20,8 @@ Layout/LineLength:
   Max: 80
 Layout/MultilineMethodDefinitionBraceLayout:
   Enabled: false
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
 Layout/MultilineMethodCallIndentation:
   Enabled: false
 Layout/SpaceAfterColon:
@@ -37,6 +39,8 @@ Layout/SpaceBeforeBlockBraces:
 Layout/SpaceBeforeFirstArg:
   Enabled: false
 Layout/SpaceInsideBlockBraces:
+  Enabled: false
+Layout/SpaceInsideHashLiteralBraces:
   Enabled: false
 Lint/AmbiguousOperatorPrecedence:
   Enabled: false

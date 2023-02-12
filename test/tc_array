@@ -6,33 +6,34 @@ class TestArray < Test::Unit::TestCase
   using Rafini::Array
   def test_array_classify
     a = [1, 2.0, :three, 'Four', /Five/, /Six/, :seven, 8]
-    h = {Integer => [1,8], Float => [2.0], Symbol => [:three,:seven], String => ['Four'], Regexp => [/Five/,/Six/]}
+    h = {Integer => [1,8], Float => [2.0], Symbol => %i[three seven],
+         String => ['Four'], Regexp => [/Five/,/Six/]}
     assert_equal h, a.classify
   end
 
   def test_array_classify_block
     a = [1, 2.0, :three, 'Four', /Five/, /Six/, :seven, 8]
     h = {Numeric: [1,2.0,8], NotNumeric: [:three,'Four',/Five/,/Six/,:seven]}
-    assert_equal h, a.classify{|v|(v.is_a? Numeric)? :Numeric : :NotNumeric}
+    assert_equal h, a.classify{_1.is_a?(Numeric)? :Numeric : :NotNumeric}
   end
 
   def test_joins
-    assert_nothing_raised() do
-      a = ['a','b','c','d']
-      x = ['x','y','z']
+    assert_nothing_raised do
+      a = %w[a b c d]
+      x = %w[x y z]
       assert_equal('axbyczd', a.joins(*x))
       assert_equal('a,b.cd', a.joins(',','.'))
       assert_equal('a-b:c:d', a.joins('-'){':'})
 
       assert_equal('', [].joins{'.'})
       assert_equal('a', ['a'].joins{'.'})
-      assert_equal('a.b', ['a','b'].joins{'.'})
+      assert_equal('a.b', %w[a b].joins{'.'})
 
       assert_equal(
         '1<9>2<8>3<7>4<6>5=5',
         [1,9,2,8,3,7,4,6,5,5].joins{|a,b|a>b ? '>': a<b ? '<': '='})
       assert_equal(
-        ['2021','Jan','09','07','29','05'].joins('-', '-', ' '){':'},
+        %w[2021 Jan 09 07 29 05].joins('-', '-', ' '){':'},
         '2021-Jan-09 07:29:05')
       assert_equal(
         'a-1+2.b,c',
@@ -42,10 +43,10 @@ class TestArray < Test::Unit::TestCase
   end
 
   def test_is
-    assert_nothing_raised() do
+    assert_nothing_raised do
       h = {a: false, b: false, c: false}
-      assert_equal({a: false, b: true, c: false, d: true}, [:b,:d].is(true,h))
-      assert_equal({b: true, d: true}, [:b,:d].is(true))
+      assert_equal({a: false, b: true, c: false, d: true}, %i[b d].is(true,h))
+      assert_equal({b: true, d: true}, %i[b d].is(true))
     end
   end
 end
