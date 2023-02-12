@@ -35,11 +35,11 @@ module Rafini
             require gemname and loaded.push gemname
           end
         end
-        return loaded
+        loaded
       end
     end
   end
 
   using Requires
-  def Rafini.requires(*list) = Kernel.requires(*list)
+  def self.requires(*list) = Kernel.requires(*list)
 end
