@@ -1,6 +1,7 @@
 _1
 a0
 age
+alias_method
 amend
 Array
 ARRAY
@@ -11,6 +12,7 @@ base
 billion
 block
 call
+camel_case
 camelize
 capitalize
 centurie
@@ -21,6 +23,7 @@ counts
 day
 decade
 description
+downcase
 dup
 e
 each
@@ -65,6 +68,7 @@ items
 join
 joins
 k
+kebab_case
 Kernel
 key
 keys
@@ -88,6 +92,7 @@ minute
 month
 msg
 n
+name_split
 negative
 new
 next
@@ -98,6 +103,7 @@ Odometers
 odoread
 one
 options
+pascal_case
 positive
 precision
 previous
@@ -135,6 +141,7 @@ seps
 shellescape
 shift
 short
+snake_case
 split
 string
 String
@@ -143,10 +150,12 @@ struct
 Struct
 sum
 supplement
+tap
 ten
 thousand
 Thread
 thread_bang
+title_case
 to_a
 to_f
 to_h

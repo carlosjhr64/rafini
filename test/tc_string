@@ -33,4 +33,18 @@ class TestString < Test::Unit::TestCase
     s = "I know!\nAnd you?".shellescape
     assert_equal "I\\ know\\!'\n'And\\ you\\?", s
   end
+
+  def test_name_cases
+    n = 'My name is ruby'
+    p = 'MyNameIsRuby'
+    c = 'myNameIsRuby'
+    s = 'my_name_is_ruby'
+    k = 'my-name-is-ruby'
+    [n, p, c, s, k].each do |name|
+      assert_equal p, name.pascal_case
+      assert_equal c, name.camel_case
+      assert_equal s, name.snake_case
+      assert_equal k, name.kebab_case
+    end
+  end
 end
