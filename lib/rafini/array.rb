@@ -4,9 +4,9 @@ module Rafini
       # classify:
       # Like Set#classify
       def classify(hash: ::Hash.new{|h,k|h[k]=[]}, &block)
-        block ||= lambda{|v|v.class}
-        self.each{|v| hash[block[v]] << v}
-        return hash
+        block ||= ->(v){v.class}
+        each{|v| hash[block[v]] << v}
+        hash
       end
 
       # is:
@@ -15,7 +15,7 @@ module Rafini
       # Updates a hash with the keys given by the array to the given value.
       def is(value, hash={})
         each{|key| hash[key]=value}
-        return hash
+        hash
       end
 
       # joins:
@@ -41,14 +41,14 @@ module Rafini
         string = ::String.new previous.to_s
         return string if items.empty?
         seps.flatten!
-        while item = items.shift
-          if sep = seps.shift&.to_s || block&.call(previous,item)&.to_s
+        while (item=items.shift)
+          if (sep=(seps.shift&.to_s || block&.call(previous,item)&.to_s))
             string << sep
           end
           string << item.to_s
           previous = item
         end
-        return string
+        string
       end
     end
   end
