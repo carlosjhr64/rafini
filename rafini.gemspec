@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   ## INFO ##
   s.name     = 'rafini'
-  s.version  = '3.2.230212'
+  s.version  = '3.3.230212'
   s.homepage = 'https://github.com/carlosjhr64/rafini'
   s.author   = 'CarlosJHR64'
   s.email    = 'carlosjhr64@gmail.com'
@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'cucumber', '~> 8.0', '>= 8.0.0'
   s.add_development_dependency 'parser', '~> 3.2', '>= 3.2.1'
   s.add_development_dependency 'rubocop', '~> 1.45', '>= 1.45.1'
+  s.add_development_dependency 'stringio', '~> 3.0', '>= 3.0.5'
   s.add_development_dependency 'test-unit', '~> 3.5', '>= 3.5.7'
   s.requirements << 'git: 2.30'
   s.requirements << 'ruby: 3.2'
