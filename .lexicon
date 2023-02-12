@@ -9,7 +9,6 @@ backtrace
 bang
 base
 billion
-blk
 block
 call
 camelize
@@ -23,6 +22,7 @@ day
 decade
 description
 dup
+e
 each
 each_key
 empty
@@ -52,8 +52,8 @@ hash
 Hash
 HASH
 hashes
-has_key
 header
+HelpParser
 hour
 hundred
 illion
@@ -69,7 +69,6 @@ Kernel
 key
 keys
 kw
-lambda
 last
 length
 level
@@ -87,7 +86,9 @@ millennium
 million
 minute
 month
+msg
 n
+negative
 new
 next
 nil
@@ -96,6 +97,8 @@ odometer
 Odometers
 odoread
 one
+options
+positive
 precision
 previous
 push
@@ -146,6 +149,7 @@ Thread
 thread_bang
 to_a
 to_f
+to_h
 to_i
 to_s
 to_struct
@@ -159,6 +163,8 @@ value
 values
 Version
 VERSION
+warn
 week
 year
+zero
 zip
