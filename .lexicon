@@ -5,6 +5,7 @@ alias_method
 amend
 Array
 ARRAY
+as
 autoload
 backtrace
 bang
@@ -98,6 +99,7 @@ new
 next
 nil
 number
+Object
 odometer
 Odometers
 odoread
