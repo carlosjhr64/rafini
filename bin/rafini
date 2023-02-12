@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'help_parser'
+require 'rafini'
+
+HelpParser[Rafini::VERSION, <<~HELP]
+  ## Rafini ##
+  Usage:
+    rafini [:options+]
+  Options:
+    -h --help
+    -v --version
+HELP

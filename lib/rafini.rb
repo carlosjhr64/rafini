@@ -1,5 +1,5 @@
 module Rafini
-  VERSION = '3.2.221213'
+  VERSION = '3.2.230212'
   # Constants
   autoload :Empty,     'rafini/empty'
   # Pure
