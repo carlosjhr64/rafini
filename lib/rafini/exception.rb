@@ -11,11 +11,11 @@ module Rafini
       #     # exact output depends on $VERBOSE and $DEBUG
       #     $!.puts('Nice message')
       #   end
-      def puts(message=nil)
-        unless $VERBOSE.nil? then
-          $stderr.puts message if message
-          $stderr.puts self.message if $VERBOSE or !message
-          $stderr.puts self.backtrace.to_s if $DEBUG
+      def puts(msg=nil)
+        unless $VERBOSE.nil?
+          warn msg if msg
+          warn message if $VERBOSE || !msg
+          warn backtrace.to_s if $DEBUG
         end
       end
     end
@@ -29,14 +29,14 @@ using Rafini::Exception
 #   value = Rafini.bang!('Ooops! Not perfect?') do
 #     # Perfect code here...
 #   end
-def Rafini.bang!(message=nil, bang=::Exception, &block)
-  value = nil
+def Rafini.bang!(msg=nil, bang=Exception, &block)
+  e = nil
   begin
-    value = block.call
-  rescue bang => value
-    value.puts(message)
+    e = block.call
+  rescue bang => e
+    e.puts(msg)
   end
-  return value
+  e
 end
 
 # The Thread wrapped version of bang!
@@ -52,6 +52,6 @@ end
 #  end
 # With the following below, I'll be able to say
 # Rafini.thread_bang!('blah blah...'){ ...stuff... }
-def Rafini.thread_bang!(header=nil, bang=::Exception, &block)
-  Thread.new{Rafini.bang!(header, bang, &block)}
+def Rafini.thread_bang!(header=nil, bang=Exception, &)
+  Thread.new{Rafini.bang!(header, bang, &)}
 end
