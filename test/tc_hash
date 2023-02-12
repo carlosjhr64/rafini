@@ -6,7 +6,7 @@ class TestHash < Test::Unit::TestCase
   using Rafini::Hash
 
   def test_to_struct
-    assert_nothing_raised() do
+    assert_nothing_raised do
       h = {a:'A',b:'B',c:'C'}
       s = h.to_struct
       assert_equal('A',s.a)
@@ -17,7 +17,7 @@ class TestHash < Test::Unit::TestCase
   end
 
   def test_supplement
-    assert_nothing_raised() do
+    assert_nothing_raised do
       h0 = {a:'A',b:'B'}.supplement({b:'X',c:'C'},{c:'Y',d:'D'})
       assert_equal({a:'A',b:'B',c:'C',d:'D'}, h0)
       h = h0.supplement({a:'Aye',x:'X'})
@@ -30,7 +30,7 @@ class TestHash < Test::Unit::TestCase
   end
 
   def test_amend
-    assert_nothing_raised() do
+    assert_nothing_raised do
       h0 = {a:'A',b:'B'}.amend({b:'X',c:'C'},{c:'Y',d:'D'})
       assert_equal({a:'A',b:'X'}, h0)
       h = h0.amend({a:'Aye'},{a:'Ah'})
@@ -41,5 +41,4 @@ class TestHash < Test::Unit::TestCase
       assert h==h0
     end
   end
-
 end
