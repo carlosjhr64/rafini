@@ -67,12 +67,22 @@ using Rafini::Integer
 123.odometer(10,10) #=> [3, 2, 1]
 30.odometer(2,3,5)  #=> [0, 0, 0, 1]
 ```
+### using Rafini::Object
+```ruby
+using Rafini::Object
+
+''.as{_1.empty? ? :empty : _1.length}    #=> :empty
+'123'.as{_1.empty? ? :empty : _1.length} #=> 3
+```
 ### using Rafini::String
 ```ruby
 using Rafini::String
 
-# camelize
-'a_camel_kick'.camelize #=> "ACamelKick"
+# cases
+'My name is ruby'.pascal_case #=> MyNameIsRuby
+'My name is ruby'.camel_case  #=> myNameIsRuby
+'My name is ruby'.snake_case  #=> my_name_is_ruby
+'My name is ruby'.kebab_case  #=> my-name-is-ruby
 
 # semantic
 '1.2.3'.semantic(0..1) #=> "1.2"
