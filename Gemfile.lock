@@ -56,6 +56,7 @@ GEM
     rubocop-ast (1.26.0)
       parser (>= 3.2.1.0)
     ruby-progressbar (1.11.0)
+    stringio (3.0.5)
     sys-uname (1.2.2)
       ffi (~> 1.1)
     test-unit (3.5.7)
@@ -71,6 +72,7 @@ DEPENDENCIES
   help_parser
   parser
   rubocop
+  stringio
   test-unit
 
 RUBY VERSION
