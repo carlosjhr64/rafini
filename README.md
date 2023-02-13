@@ -1,6 +1,6 @@
 # Rafini
 
-* [VERSION 3.3.230212](https://github.com/carlosjhr64/rafini/releases)
+* [VERSION 3.3.230213](https://github.com/carlosjhr64/rafini/releases)
 * [github](https://github.com/carlosjhr64/rafini)
 * [rubygems](https://rubygems.org/gems/rafini)
 

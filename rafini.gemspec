@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
   ## INFO ##
   s.name     = 'rafini'
-  s.version  = '3.3.230212'
+  s.version  = '3.3.230213'
   s.homepage = 'https://github.com/carlosjhr64/rafini'
   s.author   = 'CarlosJHR64'
   s.email    = 'carlosjhr64@gmail.com'
-  s.date     = '2023-02-12'
+  s.date     = '2023-02-13'
   s.licenses = ['MIT']
   ## DESCRIPTION ##
   s.summary  = <<~SUMMARY
@@ -31,9 +31,9 @@ Gem::Specification.new do |s|
   ]
   
   ## REQUIREMENTS ##
-  s.add_runtime_dependency 'help_parser', '~> 8.2', '>= 8.2.230210'
   s.add_development_dependency 'colorize', '~> 0.8', '>= 0.8.1'
   s.add_development_dependency 'cucumber', '~> 8.0', '>= 8.0.0'
+  s.add_development_dependency 'help_parser', '~> 8.2', '>= 8.2.230210'
   s.add_development_dependency 'parser', '~> 3.2', '>= 3.2.1'
   s.add_development_dependency 'rubocop', '~> 1.45', '>= 1.45.1'
   s.add_development_dependency 'stringio', '~> 3.0', '>= 3.0.5'
