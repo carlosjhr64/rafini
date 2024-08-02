@@ -42,7 +42,8 @@ GEM
     power_assert (2.0.3)
     rainbow (3.1.1)
     regexp_parser (2.7.0)
-    rexml (3.2.5)
+    rexml (3.3.3)
+      strscan
     rubocop (1.45.1)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -57,6 +58,7 @@ GEM
       parser (>= 3.2.1.0)
     ruby-progressbar (1.11.0)
     stringio (3.0.5)
+    strscan (3.1.0)
     sys-uname (1.2.2)
       ffi (~> 1.1)
     test-unit (3.5.7)
@@ -65,6 +67,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  x86_64-linux
 
 DEPENDENCIES
   colorize
